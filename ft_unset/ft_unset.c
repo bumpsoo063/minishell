@@ -1,30 +1,27 @@
 #include <string.h>
+#include <stdlib.h>
 
-static int	ft_unset_len(char *str)
-{
-	int	ret;
-
-	ret = 0;
-	while (*str != 0)
-	{
-		if (*str == '=')
-			break;
-		str++;
-		ret++;
-	}
-	return (ret);
-}
-
-// int main(int argc, char **argv, char **env);
+// string.h -> libft.h>
+// strncmp -> ft_strncmp
 void	ft_unset(char *str, char **env)
 {
-	int	i;
+	const size_t	len = strlen(str);
+	char	**ep;
+	char	**temp;
 
-	i = 0;
-	while (env[i] != 0)
+	ep = env;
+	while (*ep != 0)
 	{
-		if (strncmp(env[i], str, ft_unset_len(str)))
+		if (strncmp(*ep, str, len) == 0 && (*ep)[len] == '=')
 		{
+			temp = ep;
+			while (*temp != 0)
+			{
+				*temp = *(temp + 1);
+				temp++;
+			}
 		}
+		else
+			ep++;
 	}
 }
