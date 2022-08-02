@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:05:45 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/02 14:17:13 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/02 17:15:08 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,3 +96,4 @@ char	**ft_export(char *str, char **env)
 	ft_check_env(str, env);
 	return (ft_dup(str, env));
 }
+
