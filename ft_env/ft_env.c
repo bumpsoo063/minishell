@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 14:16:00 by bechoi            #+#    #+#             */
+/*   Updated: 2022/08/02 14:16:07 by bechoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 
-// int main(int argc, char **argv, char **env)
-// extern char **environ
 void	ft_env(char **env)
 {
 	int		i;

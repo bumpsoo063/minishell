@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 12:58:22 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/02 13:48:29 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/02 14:17:46 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**ft_init_env(char **env)
 	i = 0;
 	while (env[i] != 0)
 		i++;
-	ret = malloc(sizeof(char*) * (i + 1));
+	ret = malloc(sizeof(char *) * (i + 1));
 	ft_check_error();
 	i = 0;
 	while (env[i] != 0)
