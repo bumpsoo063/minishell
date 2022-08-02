@@ -32,6 +32,7 @@ static void	ft_check_env(char *str, char **env)
 	}
 }
 
+// need some code to check whether str contains '='
 char	**ft_export(char *str, char **env)
 {
 	int	i;
