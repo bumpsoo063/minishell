@@ -6,25 +6,21 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:05:45 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/02 17:15:08 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/02 19:03:36 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-#include <stdio.h>
-#include <unistd.h>
-
-void	ft_check_error(void);
+#include "../minishell.h"
 
 // string.h -> libft.h>
 // strdup -> ft_strdup
 // strncmp -> ft_strncmp
 static void	ft_check_env(char *str, char **env)
 {
-	char const	*del = strchr(str, '=');
+	char const	*del = strchr(str, EQUAL);
 	const int	len = del - str;
 	char		**ep;
 	char		**temp;
@@ -32,7 +28,7 @@ static void	ft_check_env(char *str, char **env)
 	ep = env;
 	while (*ep != 0)
 	{
-		if (strncmp(*ep, str, len) == 0 && (*ep)[len] == '=')
+		if (strncmp(*ep, str, len) == 0 && (*ep)[len] == EQUAL)
 		{
 			temp = ep;
 			free(*temp);
@@ -51,7 +47,7 @@ static bool	ft_check_str(char *str)
 {
 	char	*temp;
 
-	if (str == 0 || *str == 0 || *str == '=')
+	if (str == 0 || *str == 0 || *str == EQUAL)
 		return (false);
 	temp = strchr(str, '=');
 	if (temp != 0)
