@@ -9,6 +9,7 @@ enum	e_chars {
 	PIPE = 124,
 	EQUAL = 61,
 	SPACE = 32,
+	DOLLAR = 36,
 };
 
 // env -> 새롭게 export 한 변수들
@@ -17,8 +18,8 @@ enum	e_chars {
 // parse = 파싱 후 문자열의 배열
 // ex: bash$ export PATH=$PATH:/home/bumpsoo/local
 // parse ->
-// 	"PAHT"
-// 	"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/bumpsoo/local"
+// 	"export"
+// 	"PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/bumpsoo/local"
 // ex2: bash$ <main.c 
 // 	"<"
 // 	"main.c"
@@ -32,5 +33,6 @@ typedef struct s_info
 char	**ft_init_env(char **env);
 char	**ft_parse(char *str, t_info *info);
 void	ft_check_error(void);
+
 
 #endif
