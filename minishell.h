@@ -10,6 +10,8 @@ enum	e_chars {
 	EQUAL = 61,
 	SPACE = 32,
 	DOLLAR = 36,
+	BRACE_O = 123,
+	BRACE_C = 125,
 };
 
 // env -> 새롭게 export 한 변수들
