@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_env.c                                      :+:      :+:    :+:   */
+/*   ft_env.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 12:58:22 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 14:42:18 by bechoi           ###   ########.fr       */
+/*   Created: 2022/08/04 11:32:42 by bechoi            #+#    #+#             */
+/*   Updated: 2022/08/04 14:01:18 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "minishell.h"
+#ifndef FT_ENV_H
+# define FT_ENV_H
 
-// string -> libft
-// strdup -> ft_strdup
-char	**ft_init_env(char **env)
-{
-	char	**ret;
-	int		i;
+void	ft_env(char **env);
 
-	i = 0;
-	while (env[i] != 0)
-		i++;
-	ret = malloc(sizeof(char *) * (i + 1));
-	ft_check_error();
-	i = 0;
-	while (env[i] != 0)
-	{
-		ret[i] = ft_strdup(env[i]);
-		ft_check_error();
-		i++;
-	}
-	ret[i] = 0;
-	return (ret);
-}
+#endif
