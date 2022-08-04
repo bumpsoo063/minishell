@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:19 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 14:03:55 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 17:31:08 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ static char	*ft_value(char *key, char *env)
 	char	*ret;
 
 	ret = 0;
-	if (ft_strncmp(key, env, ft_strlen(key) == 0))
+	if (ft_strncmp(key, env, ft_strlen(key)) == 0)
 	{
-		ret = ft_strdup(ft_strchr(env, EQUAL) + 1);
-		ft_check_error();
+		if (*(env + ft_strlen(key)) == EQUAL)
+		{
+			ret = ft_strdup(env + ft_strlen(key) + 1);
+			ft_check_error();
+		}
 	}
 	return (ret);
 }
@@ -41,5 +44,6 @@ char	*ft_search_env(char *key, char **env)
 			return (value);
 		i++;
 	}
+	i = 0;
 	return (0);
 }

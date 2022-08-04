@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:29:35 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 14:29:41 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 17:31:15 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ char	**t_queue_to_str(t_queue *q)
 		free(temp);
 		i++;
 	}
+	ret[i] = 0;
 	return (ret);
 }

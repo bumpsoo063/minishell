@@ -6,23 +6,27 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 14:41:39 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 17:27:51 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "ft_parse.h"
 #include "../minishell.h"
+#include <stdbool.h>
 
 static char	*ft_word(char *str, char **key)
 {
 	char	*head;
 	int	i;
+	bool	f;
 
 	i = 0;
-	++str;
-	if (*str == BRACE_O)
+	if (*(++str) == BRACE_O)
+	{
 		str++;
+		f = true;
+	}
 	head = str;
 	while (*str != 0 && ft_isalpha(*str))
 	{
@@ -31,7 +35,7 @@ static char	*ft_word(char *str, char **key)
 	}
 	*key = ft_substr(head, 0, i);
 	ft_check_error();
-	if (*str == BRACE_C)
+	if (*str == BRACE_C && f == true)
 		str++;
 	return (str);
 }
@@ -64,7 +68,10 @@ char	*ft_substitute(char *str, char **env)
 	temp = ft_strchr(str, DOLLAR);
 	while (temp)
 	{
-		left = ft_substr(str, 0, temp - str - 1);
+		if (temp == str)
+			left = ft_strdup("");
+		else
+			left = ft_substr(str, 0, temp - str - 1);
 		ft_check_error();
 		temp = ft_word(temp, &key);
 		right = ft_strdup(temp);
