@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:12 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 14:39:28 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 15:58:39 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,6 @@ static t_queue	*ft_queue_pipe(char **str, char ch)
 	return (t_queue_new(temp));
 }
 
-/*static t_queue	*ft_queue_dollar(char **str, char **env)
-{
-	int	i;
-	char	*temp;
-
-	i = 0;
-	temp = *(str);
-	while (*str != 0)
-	{
-		if (**str == '}' || **str == SPACE)
-			break ;
-		(*str)++;
-		i++;
-	}
-	temp = ft_substr(temp, 0, i);
-	ft_check_error();
-	return (t_queue_new(ft_substitute(temp, env)));
-}*/
-
 static t_queue	*ft_queue_word(char **str, char **env)
 {
 	int	i;
@@ -88,7 +69,6 @@ static t_queue	*ft_queue_word(char **str, char **env)
 	return (t_queue_new(ft_substitute(temp, env)));
 }
 
-// if $ -> search through info->env, info->old_env
 char	**ft_parse(char *str, char **env)
 {
 	t_queue	*q;
