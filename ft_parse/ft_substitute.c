@@ -6,14 +6,13 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 14:04:28 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 14:41:39 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "ft_parse.h"
 #include "../minishell.h"
-
 
 static char	*ft_word(char *str, char **key)
 {
@@ -55,7 +54,7 @@ static char	*ft_union(char *left, char *key, char *right, char **env)
 	return (ret);
 }
 
-char	*ft_substitue(char *str, char **env)
+char	*ft_substitute(char *str, char **env)
 {
 	char	*left;
 	char	*key;
