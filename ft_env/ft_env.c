@@ -6,28 +6,21 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:16:00 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 11:28:58 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 14:01:09 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../minishell.h"
 
-void	ft_env(t_info *info)
+void	ft_env(char **env)
 {
 	int		i;
 
 	i = 0;
-	while (info->old_env[i] != 0)
+	while (env[i] != 0)
 	{
-		printf("%s\n", info->old_env[i]);
-		++i;
-	}
-	i = 0;
-	while (info->env[i] != 0)
-	{
-		printf("%s\n", info->env[i]);
+		printf("%s\n", env[i]);
 		++i;
 	}
 }

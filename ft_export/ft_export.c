@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:05:45 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 11:27:37 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 14:00:20 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,20 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-static bool	ft_check_env(char *str, char **env)
+static void	ft_check_env(char *str, char **env)
 {
 	char const	*del = ft_strchr(str, EQUAL);
 	const int	len = del - str;
 	char		**ep;
 	char		**temp;
-	bool		f;
 
 	ep = env;
-	f = false;
 	while (*ep != 0)
 	{
 		if (ft_strncmp(*ep, str, len) == 0 && (*ep)[len] == EQUAL)
 		{
 			temp = ep;
 			free(*temp);
-			f = true;
 			while (*temp != 0)
 			{
 				*temp = *(temp + 1);
@@ -41,7 +38,6 @@ static bool	ft_check_env(char *str, char **env)
 		else
 			ep++;
 	}
-	return (f);
 }
 
 static bool	ft_check_str(char *str)
@@ -84,18 +80,13 @@ static char	**ft_dup(char *str, char **env)
 	return (ret);
 }
 
-bool	ft_export(char *str, t_info *info)
+char	**ft_export(char *str, char **env)
 {
 	char	**ret;
 
 	if (ft_check_str(str) == false)
 		return (false);
-	if (ft_check_env(str, info->old_env))
-		info->old_env = ft_dup(str, info->old_env);
-	else
-	{
-		ft_check_env(str, info->env);
-		info->env = ft_dup(str, info->env);
-	}
-	return (true);
+
+	ft_check_env(str, env);
+	return (ft_dup(str, env));
 }

@@ -1,7 +1,6 @@
 #ifndef FT_EXPORT_H
 # define FT_EXPORT_H
-# include "../minishell.h"
 
-bool	ft_export(char *str, t_info *info);
+char	**ft_export(char *str, char **env);
 
 #endif

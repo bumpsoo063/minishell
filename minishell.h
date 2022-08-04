@@ -27,13 +27,12 @@ enum	e_chars {
 // 	"main.c"
 typedef struct s_info
 {
-	char	**old_env;
 	char	**env;
 	char	**parse;
 }	t_info;
 
 char	**ft_init_env(char **env);
-char	**ft_parse(char *str, t_info *info);
+char	**ft_parse(char *str, char **env);
 void	ft_check_error(void);
 
 

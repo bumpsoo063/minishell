@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:18:04 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 11:32:14 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 14:05:17 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "../minishell.h"
 
-static void	ft_unset_util(char *str, char **env)
+void	ft_unset(char *str, char **env)
 {
 	const size_t	len = ft_strlen(str);
 	char			**ep;
@@ -36,10 +36,4 @@ static void	ft_unset_util(char *str, char **env)
 		else
 			ep++;
 	}
-}
-
-void	ft_unset(char *str, t_info *info)
-{
-	ft_unset_util(str, info->old_env);
-	ft_unset_util(str, info->env);
 }

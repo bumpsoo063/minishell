@@ -6,12 +6,13 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 13:25:25 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 14:04:28 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "ft_parse.h"
+#include "../minishell.h"
 
 
 static char	*ft_word(char *str, char **key)
@@ -36,13 +37,13 @@ static char	*ft_word(char *str, char **key)
 	return (str);
 }
 
-static char	*ft_union(char *left, char *key, char *right, t_info *info)
+static char	*ft_union(char *left, char *key, char *right, char **env)
 {
 	char	*value;
 	char	*ret;
 	char	*temp;
 
-	value = ft_search_env(key, info);
+	value = ft_search_env(key, env);
 	ret = ft_strjoin(left, value);
 	temp = ret;
 	ret = ft_strjoin(ret, right);
@@ -54,7 +55,7 @@ static char	*ft_union(char *left, char *key, char *right, t_info *info)
 	return (ret);
 }
 
-char	*ft_substitue(char *str, t_info *info)
+char	*ft_substitue(char *str, char **env)
 {
 	char	*left;
 	char	*key;
@@ -69,7 +70,7 @@ char	*ft_substitue(char *str, t_info *info)
 		temp = ft_word(temp, &key);
 		right = ft_strdup(temp);
 		ft_check_error();
-		temp = ft_union(left, key, right, info);
+		temp = ft_union(left, key, right, env);
 		free(str);
 		str = temp;
 		temp = ft_strchr(str, DOLLAR);

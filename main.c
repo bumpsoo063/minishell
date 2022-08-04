@@ -7,7 +7,7 @@ int	main(int argc, char **argv, char **env)
 	char	*input;
 	t_info	info;
 
-	info.old_env = ft_init_env(env);
+	info.env = ft_init_env(env);
 	input = readline("minishell");
 	while (input)
 	{

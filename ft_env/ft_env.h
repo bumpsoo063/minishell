@@ -6,14 +6,13 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:32:42 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 11:32:44 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/04 14:01:18 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ENV_H
 # define FT_ENV_H
-# include "../minishell.h"
 
-void	ft_env(t_info *info);
+void	ft_env(char **env);
 
 #endif
