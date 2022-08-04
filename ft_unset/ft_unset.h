@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_unset.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 14:16:00 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 11:28:58 by bechoi           ###   ########.fr       */
+/*   Created: 2022/08/04 11:32:24 by bechoi            #+#    #+#             */
+/*   Updated: 2022/08/04 11:32:26 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../minishell.h"
+#ifndef FT_UNSET_H
+# define FT_UNSET_H
+# include "../minishell.h"
 
-void	ft_env(t_info *info)
-{
-	int		i;
+void	ft_uset(char *str, t_info *info);
 
-	i = 0;
-	while (info->old_env[i] != 0)
-	{
-		printf("%s\n", info->old_env[i]);
-		++i;
-	}
-	i = 0;
-	while (info->env[i] != 0)
-	{
-		printf("%s\n", info->env[i]);
-		++i;
-	}
-}
+#endif
