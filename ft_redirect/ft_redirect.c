@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:43:34 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/04 04:09:41 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/05 16:14:03 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ char	*ft_lt(char *path)
 	int	read_size;
 
 	fd = open(path, O_RDONLY);
+
 	if (fd < 0)
-		return (err_return(path));
+		return (0);
 	ret = ft_calloc(1, 1);
 	while (1)
 	{
@@ -77,11 +78,12 @@ char	*ft_dlt(char *end)
 	while (1)
 	{
 		// minishell 실행 중이므로 rl_redisplay로 변경여부 확인필요	
-		str = readline(">");
+		str = readline("heredoc>");
 		if (!ft_strncmp(str, end, ft_strlen(str)))
 			break ;
 		tmp = ret;
 		ret = ft_strjoin(ret, str);
+		free(str);
 		free(tmp);
 		tmp = ret;
 		ret = ft_strjoin(ret, "\n");
