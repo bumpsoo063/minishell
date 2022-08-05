@@ -2,8 +2,8 @@
 # define MINISHELL_H
 
 enum	e_chars {
-	QUOTE = 27,
-	D_QUOTE = 22,
+	QUOTE = 39,
+	D_QUOTE = 34,
 	INPUT = 60,
 	OUTPUT = 62,
 	PIPE = 124,
