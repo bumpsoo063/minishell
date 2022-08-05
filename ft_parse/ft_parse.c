@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:12 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 17:30:58 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/05 11:17:30 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ static t_queue	*ft_queue_quote(char **str, char ch, char **env)
 	char	*temp;
 
 	temp = ++(*str);
-	i = 1;
+	i = 0;
 	while (**str != 0 && **str != ch)
 	{
 		(*str)++;
 		i++;
 	}
+	if (**str == ch)
+		(*str)++;
 	temp = ft_substr(temp, 0, i);
 	ft_check_error();
 	if (ch == D_QUOTE)

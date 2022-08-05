@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 17:53:46 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/05 10:59:56 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_substitute(char *str, char **env)
 	char	*temp;
 
 	temp = ft_strchr(str, DOLLAR);
-	while (temp)
+	while (temp != 0)
 	{
 		if (temp == str)
 			left = ft_strdup("");
@@ -74,7 +74,10 @@ char	*ft_substitute(char *str, char **env)
 			left = ft_substr(str, 0, temp - str - 1);
 		ft_check_error();
 		temp = ft_word(temp, &key);
-		right = ft_strdup(temp);
+		if (*temp == 0)
+			right = ft_strdup("");
+		else
+			right = ft_strdup(temp);
 		ft_check_error();
 		temp = ft_union(left, key, right, env);
 		free(str);

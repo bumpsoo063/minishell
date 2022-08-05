@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:29:35 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 17:31:15 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/05 11:20:57 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_queue	*t_queue_new(char *str)
 	q = malloc(sizeof(t_queue));
 	ft_check_error();
 	q->str = str;
+	q->next = 0;
 	return (q);
 }
 
@@ -33,7 +34,7 @@ void	t_queue_push(t_queue **head, t_queue *q)
 	else
 	{
 		temp = *head;
-		while (temp->next != 0)
+		while (temp != 0 && temp->next != 0)
 			temp = temp->next;
 		temp->next = q;
 	}
@@ -66,7 +67,6 @@ int	t_queue_size(t_queue *q)
 
 char	**t_queue_to_str(t_queue *q)
 {
-	t_queue	*temp;
 	char	**ret;
 	int		i;
 
@@ -75,10 +75,7 @@ char	**t_queue_to_str(t_queue *q)
 	ft_check_error();
 	while (q != 0)
 	{
-		ret[i] = q->str;
-		temp = q;
-		q = q->next;
-		free(temp);
+		ret[i] = t_queue_pop(&q);
 		i++;
 	}
 	ret[i] = 0;
