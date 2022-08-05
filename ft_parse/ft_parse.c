@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:12 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/05 11:17:30 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/05 12:05:45 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_queue	*ft_queue_quote(char **str, char ch, char **env)
 	return (t_queue_new(temp));
 }
 
-static t_queue	*ft_queue_pipe(char **str, char ch)
+static t_queue	*ft_queue_put(char **str, char ch)
 {
 	int	i;
 	char	*temp;
@@ -51,6 +51,18 @@ static t_queue	*ft_queue_pipe(char **str, char ch)
 	}
 	temp = ft_substr(temp, 0, i);
 	ft_check_error();
+	return (t_queue_new(temp));
+}
+
+static t_queue	*ft_queue_pipe(char **str)
+{
+	int	i;
+	char	*temp;
+
+	i = 0;
+	temp = ft_strdup("|");
+	ft_check_error();
+	(*str)++;
 	return (t_queue_new(temp));
 }
 
@@ -85,11 +97,11 @@ char	**ft_parse(char *str, char **env)
 		else if (*str == QUOTE)
 			t_queue_push(&q, ft_queue_quote(&str, QUOTE, env));
 		else if (*str == INPUT)
-			t_queue_push(&q, ft_queue_pipe(&str, INPUT));
+			t_queue_push(&q, ft_queue_put(&str, INPUT));
 		else if (*str == OUTPUT)
-			t_queue_push(&q, ft_queue_pipe(&str, OUTPUT));
+			t_queue_push(&q, ft_queue_put(&str, OUTPUT));
 		else if (*str == PIPE)
-			t_queue_push(&q, ft_queue_pipe(&str, PIPE));
+			t_queue_push(&q, ft_queue_pipe(&str));
 		else
 			t_queue_push(&q, ft_queue_word(&str, env));
 	}

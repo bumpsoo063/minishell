@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/05 10:59:56 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/05 12:02:26 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ft_substitute(char *str, char **env)
 		if (temp == str)
 			left = ft_strdup("");
 		else
-			left = ft_substr(str, 0, temp - str - 1);
+			left = ft_substr(str, 0, temp - str);
 		ft_check_error();
 		temp = ft_word(temp, &key);
 		if (*temp == 0)
