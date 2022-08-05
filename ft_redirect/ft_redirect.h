@@ -13,4 +13,10 @@
 #ifndef FT_REDIRECT_H
 # define FT_RECIREDT_H
 
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <readline/readline.h>
+#include "../libft/libft.h"
+
 #endif
