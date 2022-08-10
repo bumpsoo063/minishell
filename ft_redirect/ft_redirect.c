@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:43:34 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/05 16:14:03 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/10 21:51:34 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	*ft_lt(char *path)
 		free(tmp);
 		if (read_size < 1023)
 			break ;
-
 	}
 	return (ret);
 }
