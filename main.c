@@ -2,22 +2,41 @@
 #include <readline/readline.h>
 #include <stdlib.h>
 #include <errno.h>
+#include "libft/libft.h"
+#include "ft_parse/ft_parse.h"
+#include "ft_init/ft_init.h"
+#include "t_queue/t_queue.h"
 
 #include <stdio.h>
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*input;
-	t_info	info;
 
 	argc = 0;
 	argv = 0;
-	info.env = ft_init_env(env);
-	input = readline("minishell $ ");
-	// 이유는 모르겠지만 readline을 호출할 때 errno이 2로 바뀌어서 초기화를 해줘야함
-	errno = 0;
-	info.parse = ft_parse(input, info.env);
-	for (int i = 0; info.parse[i] != 0; i++)
+	g_info.env = ft_init_env(env);
+	while (1)
 	{
-		printf("%s\n", info.parse[i]);
+		input = readline(PROM);
+		errno = 0;
+		if (input == 0)
+			break ;
+		add_history(input);
+		g_info.parse = ft_parse(input, g_info.env);
+		for (int i = 0; g_info.parse[i] != 0; i++)
+			printf("%s\n", g_info.parse[i]);
+		if (ft_parse_syntax(g_info.parse) != 0)
+		{
+			write(2, PARSE_ERROR, ft_strlen(PARSE_ERROR));
+			continue ;
+		}
+		g_info.re = ft_init_re(g_info.parse);
+		// fd, buf 초기화
+		// 실행
+		ft_parse_free(g_info.parse);
+		t_q_re_free(&g_info.re);
+		free(input);
+		// system("leaks minishell");
 	}
 }
