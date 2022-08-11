@@ -2,22 +2,57 @@
 #include <readline/readline.h>
 #include <stdlib.h>
 #include <errno.h>
+#include "libft/libft.h"
+#include "ft_parse/ft_parse.h"
+#include "ft_init/ft_init.h"
 
 #include <stdio.h>
+
+static int	ft_check_pipe(char **parse)
+{
+	int	i;
+
+	i = 0;
+	while (parse[i] != 0)
+	{
+		if (parse[i][0] == Pipe)
+		{
+			if (i == 0)
+				return (1);
+			else
+			{
+				if (parse[i - 1][0] == Pipe)
+					return (1);
+			}
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*input;
-	t_info	info;
 
 	argc = 0;
 	argv = 0;
-	info.env = ft_init_env(env);
-	input = readline("minishell $ ");
-	// 이유는 모르겠지만 readline을 호출할 때 errno이 2로 바뀌어서 초기화를 해줘야함
-	errno = 0;
-	info.parse = ft_parse(input, info.env);
-	for (int i = 0; info.parse[i] != 0; i++)
+	g_info.env = ft_init_env(env);
+	while (1)
 	{
-		printf("%s\n", info.parse[i]);
+		input = readline(PROM);
+		errno = 0;
+		if (input == 0)
+			break ;
+		g_info.parse = ft_parse(input, g_info.env);
+		for (int i = 0; g_info.parse[i] != 0; i++)
+			printf("%s\n", g_info.parse[i]);
+		if (ft_check_pipe(g_info.parse) != 0)
+		{
+			write(2, PIPE_ERROR, ft_strlen(PIPE_ERROR));
+			continue ;
+		}
+		g_info.re = ft_init_re(g_info.parse);
+		// g_info.parse -> should be freed
+		// re either
 	}
 }

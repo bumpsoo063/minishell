@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_queue.c                                          :+:      :+:    :+:   */
+/*   t_q_str.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:29:35 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/05 11:20:57 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/09 15:41:15 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 #include "t_queue.h"
 #include "../minishell.h"
 
-t_queue	*t_queue_new(char *str)
+t_q_str	*t_q_str_new(char *str)
 {
-	t_queue	*q;
+	t_q_str	*q;
 
-	q = malloc(sizeof(t_queue));
+	q = malloc(sizeof(t_q_str));
 	ft_check_error();
 	q->str = str;
 	q->next = 0;
 	return (q);
 }
 
-void	t_queue_push(t_queue **head, t_queue *q)
+void	t_q_str_push(t_q_str **head, t_q_str *q)
 {
-	t_queue	*temp;
+	t_q_str	*temp;
 
 	if (*head == 0)
 		*head = q;
@@ -40,9 +40,9 @@ void	t_queue_push(t_queue **head, t_queue *q)
 	}
 }
 
-char	*t_queue_pop(t_queue **head)
+char	*t_q_str_pop(t_q_str **head)
 {
-	t_queue	*temp;
+	t_q_str	*temp;
 	char	*ret;
 
 	temp = *head;
@@ -52,7 +52,7 @@ char	*t_queue_pop(t_queue **head)
 	return (ret);
 }
 
-int	t_queue_size(t_queue *q)
+int	t_q_str_size(t_q_str *q)
 {
 	int	ret;
 
@@ -65,17 +65,17 @@ int	t_queue_size(t_queue *q)
 	return (ret);
 }
 
-char	**t_queue_to_str(t_queue *q)
+char	**t_q_str_to_str(t_q_str *q)
 {
 	char	**ret;
 	int		i;
 
 	i = 0;
-	ret = malloc(sizeof(char *) * (t_queue_size(q) + 1));
+	ret = malloc(sizeof(char *) * (t_q_str_size(q) + 1));
 	ft_check_error();
 	while (q != 0)
 	{
-		ret[i] = t_queue_pop(&q);
+		ret[i] = t_q_str_pop(&q);
 		i++;
 	}
 	ret[i] = 0;

@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:12 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/05 12:05:45 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/09 16:45:00 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../libft/libft.h"
 #include "ft_parse.h"
 
-static t_queue	*ft_queue_quote(char **str, char ch, char **env)
+static t_q_str	*ft_q_str_quote(char **str, char ch, char **env)
 {
 	int	i;
 	char	*temp;
@@ -32,12 +32,12 @@ static t_queue	*ft_queue_quote(char **str, char ch, char **env)
 		(*str)++;
 	temp = ft_substr(temp, 0, i);
 	ft_check_error();
-	if (ch == D_QUOTE)
-		return (t_queue_new(ft_substitute(temp, env)));
-	return (t_queue_new(temp));
+	if (ch == D_Quote)
+		return (t_q_str_new(ft_substitute(temp, env)));
+	return (t_q_str_new(temp));
 }
 
-static t_queue	*ft_queue_put(char **str, char ch)
+static t_q_str	*ft_q_str_put(char **str, char ch)
 {
 	int	i;
 	char	*temp;
@@ -51,10 +51,10 @@ static t_queue	*ft_queue_put(char **str, char ch)
 	}
 	temp = ft_substr(temp, 0, i);
 	ft_check_error();
-	return (t_queue_new(temp));
+	return (t_q_str_new(temp));
 }
 
-static t_queue	*ft_queue_pipe(char **str)
+static t_q_str	*ft_q_str_pipe(char **str)
 {
 	int	i;
 	char	*temp;
@@ -63,47 +63,47 @@ static t_queue	*ft_queue_pipe(char **str)
 	temp = ft_strdup("|");
 	ft_check_error();
 	(*str)++;
-	return (t_queue_new(temp));
+	return (t_q_str_new(temp));
 }
 
-static t_queue	*ft_queue_word(char **str, char **env)
+static t_q_str	*ft_q_str_word(char **str, char **env)
 {
 	int	i;
 	char 	*temp;
 	
 	temp = *str;
 	i = 0;
-	while (**str != 0 && **str != SPACE)
+	while (**str != 0 && **str != Space && **str != Input && **str != Output && **str != Pipe)
 	{
 		(*str)++;
 		i++;
 	}
 	temp = ft_substr(temp, 0, i);
 	ft_check_error();
-	return (t_queue_new(ft_substitute(temp, env)));
+	return (t_q_str_new(ft_substitute(temp, env)));
 }
 
 char	**ft_parse(char *str, char **env)
 {
-	t_queue	*q;
+	t_q_str	*q;
 
 	q = 0;
 	while (*str != 0)
 	{
-		if (*str == SPACE)
+		if (*str == Space)
 			str++;
-		else if (*str == D_QUOTE)
-			t_queue_push(&q, ft_queue_quote(&str, D_QUOTE, env));
-		else if (*str == QUOTE)
-			t_queue_push(&q, ft_queue_quote(&str, QUOTE, env));
-		else if (*str == INPUT)
-			t_queue_push(&q, ft_queue_put(&str, INPUT));
-		else if (*str == OUTPUT)
-			t_queue_push(&q, ft_queue_put(&str, OUTPUT));
-		else if (*str == PIPE)
-			t_queue_push(&q, ft_queue_pipe(&str));
+		else if (*str == D_Quote)
+			t_q_str_push(&q, ft_q_str_quote(&str, D_Quote, env));
+		else if (*str == Quote)
+			t_q_str_push(&q, ft_q_str_quote(&str, Quote, env));
+		else if (*str == Input)
+			t_q_str_push(&q, ft_q_str_put(&str, Input));
+		else if (*str == Output)
+			t_q_str_push(&q, ft_q_str_put(&str, Output));
+		else if (*str == Pipe)
+			t_q_str_push(&q, ft_q_str_pipe(&str));
 		else
-			t_queue_push(&q, ft_queue_word(&str, env));
+			t_q_str_push(&q, ft_q_str_word(&str, env));
 	}
-	return (t_queue_to_str(q));
+	return (t_q_str_to_str(q));
 }

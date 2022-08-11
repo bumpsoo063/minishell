@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:05:45 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 14:38:26 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/09 15:55:03 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static void	ft_check_env(char *str, char **env)
 {
-	char const	*del = ft_strchr(str, EQUAL);
+	char const	*del = ft_strchr(str, Equal);
 	const int	len = del - str;
 	char		**ep;
 	char		**temp;
@@ -25,7 +25,7 @@ static void	ft_check_env(char *str, char **env)
 	ep = env;
 	while (*ep != 0)
 	{
-		if (ft_strncmp(*ep, str, len) == 0 && (*ep)[len] == EQUAL)
+		if (ft_strncmp(*ep, str, len) == 0 && (*ep)[len] == Equal)
 		{
 			temp = ep;
 			free(*temp);
@@ -44,7 +44,7 @@ static bool	ft_check_str(char *str)
 {
 	char	*temp;
 
-	if (str == 0 || *str == 0 || *str == EQUAL)
+	if (str == 0 || *str == 0 || *str == Equal)
 		return (false);
 	temp = ft_strchr(str, '=');
 	if (temp != 0)
