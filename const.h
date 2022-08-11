@@ -1,5 +1,5 @@
 #ifndef CONST_H
-# define PIPE_ERROR "pipe parse error\n"
+# define PARSE_ERROR "parse error\n"
 # define PROM "minishell $ "
 # define CONST_H
 # define INPUT "<"

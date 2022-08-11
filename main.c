@@ -5,30 +5,9 @@
 #include "libft/libft.h"
 #include "ft_parse/ft_parse.h"
 #include "ft_init/ft_init.h"
+#include "t_queue/t_queue.h"
 
 #include <stdio.h>
-
-static int	ft_check_pipe(char **parse)
-{
-	int	i;
-
-	i = 0;
-	while (parse[i] != 0)
-	{
-		if (parse[i][0] == Pipe)
-		{
-			if (i == 0)
-				return (1);
-			else
-			{
-				if (parse[i - 1][0] == Pipe)
-					return (1);
-			}
-		}
-		i++;
-	}
-	return (0);
-}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -47,13 +26,17 @@ int	main(int argc, char **argv, char **env)
 		g_info.parse = ft_parse(input, g_info.env);
 		for (int i = 0; g_info.parse[i] != 0; i++)
 			printf("%s\n", g_info.parse[i]);
-		if (ft_check_pipe(g_info.parse) != 0)
+		if (ft_parse_syntax(g_info.parse) != 0)
 		{
-			write(2, PIPE_ERROR, ft_strlen(PIPE_ERROR));
+			write(2, PARSE_ERROR, ft_strlen(PARSE_ERROR));
 			continue ;
 		}
 		g_info.re = ft_init_re(g_info.parse);
-		// g_info.parse -> should be freed
-		// re either
+		// fd, buf 초기화
+		// 실행
+		ft_parse_free(g_info.parse);
+		t_q_re_free(&g_info.re);
+		free(input);
+		// system("leaks minishell");
 	}
 }

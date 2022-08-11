@@ -6,7 +6,7 @@
 #    By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/02 19:33:42 by bechoi            #+#    #+#              #
-#    Updated: 2022/08/11 15:36:13 by bechoi           ###   ########.fr        #
+#    Updated: 2022/08/11 17:11:29 by bechoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRC=./main.c \
     ./ft_export/ft_export.c \
     ./ft_parse/ft_parse.c \
     ./ft_parse/ft_search_env.c \
+    ./ft_parse/ft_parse_syntax.c \
+    ./ft_parse/ft_parse_free.c \
     ./ft_parse/ft_substitute.c \
     ./t_queue/t_q_str.c \
     ./t_queue/t_q_re.c

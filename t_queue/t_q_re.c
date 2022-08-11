@@ -33,6 +33,7 @@ void	t_q_re_push(t_q_re **head, t_q_re *q)
 	}
 }
 
+// buf should be freed
 t_q_re	t_q_re_pop(t_q_re **head)
 {
 	t_q_re	*temp;
@@ -43,4 +44,20 @@ t_q_re	t_q_re_pop(t_q_re **head)
 	*head = (*head)->next;
 	free(temp);
 	return (ret);
+}
+
+void	t_q_re_free(t_q_re **head)
+{
+	t_q_re	*temp;
+	t_q_re	*dup;
+
+	temp = *head;
+	while (temp != 0)
+	{
+		dup = temp;
+		free(dup->buf);
+		temp = temp->next;
+		free(dup);
+	}
+	*head = 0;
 }

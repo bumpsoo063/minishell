@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:29:33 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/11 13:49:00 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/11 16:03:25 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_q_re
 t_q_re	*t_q_re_new(char *str, int index);
 void	t_q_re_push(t_q_re **head, t_q_re *q);
 t_q_re	t_q_re_pop(t_q_re **head);
+void	t_q_re_free(t_q_re **head);
 
 /*typedef struct s_q_com
 {
