@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/05 12:02:26 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/11 14:22:44 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ static char	*ft_word(char *str, char **key)
 	bool	f;
 
 	i = 0;
-	if (*(++str) == BRACE_O)
+	if (*(++str) == Brace_O)
 	{
 		str++;
 		f = true;
 	}
 	head = str;
-	while (*str != 0 && ft_isalpha(*str))
+	while (*str != 0 && (ft_isalpha(*str) || *str == '_'))
 	{
 		str++;
 		i++;
 	}
 	*key = ft_substr(head, 0, i);
 	ft_check_error();
-	if (*str == BRACE_C && f == true)
+	if (*str == Brace_C && f == true)
 		str++;
 	return (str);
 }
@@ -65,7 +65,7 @@ char	*ft_substitute(char *str, char **env)
 	char	*right;
 	char	*temp;
 
-	temp = ft_strchr(str, DOLLAR);
+	temp = ft_strchr(str, Dollar);
 	while (temp != 0)
 	{
 		if (temp == str)
@@ -82,7 +82,7 @@ char	*ft_substitute(char *str, char **env)
 		temp = ft_union(left, key, right, env);
 		free(str);
 		str = temp;
-		temp = ft_strchr(str, DOLLAR);
+		temp = ft_strchr(str, Dollar);
 	}
 	return (str);
 }
