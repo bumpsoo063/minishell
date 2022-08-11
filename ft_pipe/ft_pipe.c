@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:05:31 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/10 18:45:02 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/12 05:49:52 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,36 @@
 
 #define MAX_BUF 1024 
 
-int	main(int ac, char **av)
+int	main(void)
 {
 	int		fd[2];
-	pid_t	pid;
 	char	buf[1024];
+	int		oldfd;
+	pid_t	pid;
+	char	*cmd1;
+	char	*cmd2;
 
+	cmd1 = "cat log";
+	cmd2 = "wc";
 	if (pipe(fd) < 0)
-	{
-		printf("Error\n");
-		return (1);
-	}
+		return (0);
 	pid = fork();
-	if (pid < 0)
-	{
-		printf("Error\n");
-		return (1);
-	}
-	// 자식프로세스
 	if (pid == 0)
 	{
-		dup2(fd[1], 1);
 		close(fd[0]);
-		ft_execve(av[1]);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		ft_execve(cmd1);
+		exit(1);
 	}
 	else
 	{
-		dup2(fd[0], 0);
 		close(fd[1]);
-		read(fd[0], buf, MAX_BUF);
-		printf("%s\n", buf);
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		waitpid(pid, NULL, 0);
+		if (!ft_execve(cmd2))
+			printf("error!!!\n");
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/12 01:56:15 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/12 04:39:19 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static int	ft_process(char	**path, char **str)
 		return (0);
 	if (pid == 0)
 	{
-		cmd = ft_calloc(sizeof(char *), 2);
+		cmd = ft_calloc(sizeof(char *), 3);
+		cmd[1] = str[1];
 		i = 0;
 		while (i < 6)
 		{
-			tmp = cmd[0];
 			cmd[0] = ft_strjoin(path[i++], str[0]);
-			execve(cmd[0], str, NULL);
+			execve(cmd[0], cmd, NULL);
 		}
 		exit(1);
 	}
@@ -76,3 +76,10 @@ int	ft_execve(char *cmd)
 	ft_free(str, path);
 	return (ret);
 }
+
+
+int	main(int ac, char **av)
+{
+	ft_execve(av[1]);
+}
+
