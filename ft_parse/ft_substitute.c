@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/09 15:56:46 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/11 14:22:44 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*ft_word(char *str, char **key)
 		f = true;
 	}
 	head = str;
-	while (*str != 0 && ft_isalpha(*str))
+	while (*str != 0 && (ft_isalpha(*str) || *str == '_'))
 	{
 		str++;
 		i++;

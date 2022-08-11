@@ -43,6 +43,7 @@ int	main(int argc, char **argv, char **env)
 		errno = 0;
 		if (input == 0)
 			break ;
+		add_history(input);
 		g_info.parse = ft_parse(input, g_info.env);
 		for (int i = 0; g_info.parse[i] != 0; i++)
 			printf("%s\n", g_info.parse[i]);
