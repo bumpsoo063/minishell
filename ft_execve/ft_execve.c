@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/12 04:39:19 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/12 20:48:56 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	ft_process(char	**path, char **str)
 	int		i;
 	char	**cmd;
 	int		ret;
-	char	*tmp;
 
 	pid = fork();
 	if (pid < 0)
@@ -62,7 +61,7 @@ int	ft_execve(char *cmd)
 	int		ret;
 
 	path = ft_calloc(sizeof(char*), 7);
-	if (!str || !path)
+	if (!path)
 		return (0);
 	// PATH에서 받아와야함
 	path[0] = "/usr/local/bin/";
@@ -77,9 +76,9 @@ int	ft_execve(char *cmd)
 	return (ret);
 }
 
-
+/*
 int	main(int ac, char **av)
 {
-	ft_execve(av[1]);
+	ft_execve("cat");
 }
-
+*/
