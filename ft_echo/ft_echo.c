@@ -12,17 +12,10 @@
 
 #include "ft_echo.h"
 
-char	*ft_echo(char *str, int offset)
+void	ft_echo(char *str, int offset)
 {
-	char	*ret;
-	char	*tmp;
+	printf("%s", str);
 
-	ret = ft_strdup(str);
 	if (offset)
-	{
-		tmp = ret;
-		ret = ft_strjoin(ret, "\n");
-		free(tmp);
-	}
-	return (ret);
+		printf("\n");
 }

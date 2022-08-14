@@ -12,11 +12,15 @@
 
 #include "ft_pwd.h"
 
-char	*ft_pwd(void)
+int	ft_pwd(void)
 {
 	char	*buf;
 	
 	buf = ft_calloc(sizeof(char), 1024);
+	if (!buf)
+		return (0);
 	getcwd(buf, 1024);
-	return (buf);
+	printf("%s\n", buf);
+	free(buf);
+	return (1);
 }

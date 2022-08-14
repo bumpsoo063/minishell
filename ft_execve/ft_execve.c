@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_execve.h"
+#include <sys/types.h>
+#include <sys/wait.h>
 
 static int	ft_process(char	**path, char **str)
 {

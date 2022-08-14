@@ -28,7 +28,7 @@ int	ft_pipe(char *cmd)
 		//자식 프로세스(명령어실행)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
-		//명령어 실행하는 곳 상의 필요(외부 함수 제외 빌트인 함수 에러처리 핋요)
+		//명령어 실행하는 곳 상의 필요(외부 함수 제외 빌트인 함수 에러처리 필요)
 		ft_execve(cmd);
 		//////////////////////////////
 		exit(1);
@@ -51,7 +51,7 @@ int	main(void)
 
 	oldfd = dup(STDIN_FILENO);
 	cmd1 = "cat log";
-	cmd2 = "wc -l";
+	cmd2 = "> 5";
 	ft_pipe(cmd1);
 
 	pipe(fd);
