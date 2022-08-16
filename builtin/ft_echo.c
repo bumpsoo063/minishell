@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 22:09:15 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/03 22:42:02 by kyoon            ###   ########.fr       */
+/*   Created: 2022/08/03 22:10:36 by kyoon             #+#    #+#             */
+/*   Updated: 2022/08/16 15:19:00 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pwd.h"
+#include <stdio.h>
 
-int	ft_pwd(void)
+void	ft_echo(char *str, int offset)
 {
-	char	*buf;
-	
-	buf = ft_calloc(sizeof(char), 1024);
-	if (!buf)
-		return (0);
-	getcwd(buf, 1024);
-	printf("%s\n", buf);
-	free(buf);
-	return (1);
+	printf("%s", str);
+
+	if (offset)
+		printf("\n");
 }

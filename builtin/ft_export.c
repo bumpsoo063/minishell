@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:05:45 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/09 15:55:03 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/16 14:43:38 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ static void	ft_check_env(char *str, char **env)
 	}
 }
 
-static bool	ft_check_str(char *str)
+static int	ft_check_str(char *str)
 {
 	char	*temp;
 
 	if (str == 0 || *str == 0 || *str == Equal)
-		return (false);
-	temp = ft_strchr(str, '=');
+		return (0);
+	temp = ft_strchr(str, Equal);
 	if (temp != 0)
 		if (*(temp - 1) != 0 && *(temp + 1) != 0)
-			return (true);
-	return (false);
+			return (1);
+	return (0);
 }
 
 static char	**ft_dup(char *str, char **env)
@@ -75,16 +75,20 @@ static char	**ft_dup(char *str, char **env)
 	i = 0;
 	while (env[i] != 0)
 		free(env[i++]);
-	free(env[i]);
 	free(env);
 	return (ret);
 }
 
+static void	ft_print(char **env, int size)
+{
+	char	**temp;
+
+}
+
 char	**ft_export(char *str, char **env)
 {
-	if (ft_check_str(str) == false)
-		return (false);
-
+	if (ft_check_str(str) == 0)
+		return (0);
 	ft_check_env(str, env);
 	return (ft_dup(str, env));
 }
