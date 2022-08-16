@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:17:29 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/02 14:55:06 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/16 17:46:14 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	ft_check_error(void)
 	if (errno > 0)
 	{
 		write(2, strerror(errno), strlen(strerror(errno)));
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 }
