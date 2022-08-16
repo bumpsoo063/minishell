@@ -18,21 +18,20 @@ static int	ft_process(char	**path, char **str, char **env)
 {
 	pid_t	pid;
 	int		i;
-	char	**cmd;
+	char	*cmd;
 	int		ret;
 
 	pid = fork();
 	if (pid < 0)
-		return (0);
+		// return 값 고민
+		return (1);
 	if (pid == 0)
 	{
-		cmd = ft_calloc(sizeof(char *), 3);
-		cmd[1] = str[1];
 		i = 0;
 		while (path[i])
 		{
-			cmd[0] = ft_strjoin(path[i++], str[0]);
-			execve(cmd[0], cmd, NULL);
+			cmd = ft_strjoin(path[i++], str[0]);
+			execve(cmd[0], str, NULL);
 		}
 		exit(1);
 	}
@@ -65,7 +64,6 @@ static int	ft_free(char **str, char **path)
 int	ft_execve(char **cmd, char **env)
 {
 	char	**path;
-	char	**str;
 	int		ret;
 	char	*tmp;
 
@@ -75,9 +73,9 @@ int	ft_execve(char **cmd, char **env)
 	free(tmp);
 	if (!path)
 		return (0);
-	str = ft_split(cmd, ' ');
-	ret = ft_process(path, str);
-	ft_free(str, path);
+	ret = ft_process(path, cmd);
+	// cmd free 여부 상의
+	ft_free(cmd, path);
 	return (ret);
 }
 

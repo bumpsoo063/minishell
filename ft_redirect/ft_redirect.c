@@ -56,7 +56,7 @@ char	*ft_dlt(char *end)
 	{
 		// minishell 실행 중이므로 rl_redisplay로 변경여부 확인필요	
 		str = readline("heredoc>");
-		if (!ft_strncmp(str, end, ft_strlen(str)))
+		if (!ft_strncmp(str, end, ft_strlen(str) + 1))
 			break ;
 		tmp = ret;
 		ret = ft_strjoin(ret, str);

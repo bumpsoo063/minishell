@@ -14,7 +14,15 @@
 
 void	ft_echo(char *str, int offset)
 {
-	printf("%s", str);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		printf("%s", str);
+		if (str[i + 1])
+			printf(" ");
+	}
 
 	if (offset)
 		printf("\n");

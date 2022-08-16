@@ -16,19 +16,10 @@
 
 char	*ft_cd(char *str)
 {
-	char	*ret;
-	char	*tmp;
+	int	ret;
 
+	ret = 0;
 	if (chdir(str))
-	{
-		ret = ft_strdup("cd: No such file or directory: ");
-		tmp = ret;
-		ret = ft_strjoin(ret, str);
-		free(tmp);
-		tmp = ret;
-		ret = ft_strjoin(ret, "\n");
-		free(tmp);
-		return (ret);
-	}
-	return (0);
+		ret = -1;
+	return (ret);
 }
