@@ -14,7 +14,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-static int	ft_process(char	**path, char **str)
+static int	ft_process(char	**path, char **str, char **env)
 {
 	pid_t	pid;
 	int		i;
@@ -29,7 +29,7 @@ static int	ft_process(char	**path, char **str)
 		cmd = ft_calloc(sizeof(char *), 3);
 		cmd[1] = str[1];
 		i = 0;
-		while (i < 6)
+		while (path[i])
 		{
 			cmd[0] = ft_strjoin(path[i++], str[0]);
 			execve(cmd[0], cmd, NULL);
@@ -46,9 +46,15 @@ static int	ft_free(char **str, char **path)
 
 	i = 0;
 	if (path)
+	{
+		while (path[i])
+			free(path[i++]);
 		free(path);
+	}
 	if (str)
 	{
+		i = 0;
+
 		while (str[i])
 			free(str[i++]);
 		free(str);
@@ -56,22 +62,19 @@ static int	ft_free(char **str, char **path)
 	return (0);
 }
 
-int	ft_execve(char *cmd)
+int	ft_execve(char **cmd, char **env)
 {
 	char	**path;
 	char	**str;
 	int		ret;
+	char	*tmp;
 
-	path = ft_calloc(sizeof(char*), 7);
+	
+	tmp = ft_substitute(ft_strdup("$PATH"), env);
+	path = ft_split(tmp, ':');
+	free(tmp);
 	if (!path)
 		return (0);
-	// PATH에서 받아와야함
-	path[0] = "/usr/local/bin/";
-	path[1] = "/usr/bin/";
-	path[2] = "/bin/";
-	path[3] = "/usr/sbin/";
-	path[4] = "sbin/";
-	path[5] = "/usr/local/munki";
 	str = ft_split(cmd, ' ');
 	ret = ft_process(path, str);
 	ft_free(str, path);
@@ -79,8 +82,9 @@ int	ft_execve(char *cmd)
 }
 
 /*
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
-	ft_execve("cat");
+	ft_execve("cat", env);
 }
 */
+
