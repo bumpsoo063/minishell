@@ -6,11 +6,13 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:43:34 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/10 21:51:34 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/17 16:30:47 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_redirect.h"
+
+#define FILE_NAME "/tmp/.minishell_heredoc"
 
 // >, >>
 int	ft_gt(char *path, int offset)
@@ -45,27 +47,40 @@ int	ft_lt(char *path)
 	return (1);
 }
 
-char	*ft_dlt(char *end)
+static int	ft_dupin(void)
+{
+	int	fd;
+
+	fd = open(FILE_NAME, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	return (1);
+}
+
+int	ft_dlt(char *end)
 {
 	char	*str;
-	char	*ret;
-	char	*tmp;
+	int		fd;
 
-	ret = ft_calloc(1, 1);
+	fd = open(FILE_NAME, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (fd < 0)
+		return (0);
 	while (1)
 	{
-		// minishell 실행 중이므로 rl_redisplay로 변경여부 확인필요	
 		str = readline("heredoc>");
 		if (!ft_strncmp(str, end, ft_strlen(str) + 1))
 			break ;
-		tmp = ret;
-		ret = ft_strjoin(ret, str);
+		write(fd, str, ft_strlen(str));
+		write(fd, "\n", 1);
 		free(str);
-		free(tmp);
-		tmp = ret;
-		ret = ft_strjoin(ret, "\n");
-	printf("%s\n", ft_dlt(av[1]));
-		free(tmp);
 	}
-	return (ret);
+	close(fd);
+	return (ft_dupin());
+}
+
+int	ft_rm_heredoc(void)
+{
+	return (unlink(FILE_NAME));
 }

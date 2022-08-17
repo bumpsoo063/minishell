@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:07:29 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/16 15:20:25 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 16:38:44 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 #include <errno.h>
 #include <string.h>
 
-char	*ft_cd(char *str)
+char	*ft_cd(char *str, char **env)
 {
-	int	ret;
-
-	ret = 0;
+	
 	if (chdir(str))
-		ret = -1;
-	return (ret);
+		return (-1);
+	return (0);
 }
