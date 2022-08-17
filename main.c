@@ -30,6 +30,7 @@ static int	ft_process(t_info *info)
 		}
 		// unlink heredoc
 	}
+	return (1);
 }
 
 static int	ft_preprocess(t_info *info,char *input)
@@ -41,7 +42,7 @@ static int	ft_preprocess(t_info *info,char *input)
 		ft_clean_info(&g_info, input);
 		return (0);
 	}
-	return (1);
+	return (ft_process(info));
 }
 
 int	main(int argc, char **argv, char **env)
