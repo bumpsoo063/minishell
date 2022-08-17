@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:05:45 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/16 14:43:38 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 16:29:28 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include "../minishell.h"
 #include "../libft/libft.h"
+#include "builtin.h"
 
 static void	ft_check_env(char *str, char **env)
 {
@@ -79,16 +80,25 @@ static char	**ft_dup(char *str, char **env)
 	return (ret);
 }
 
-static void	ft_print(char **env, int size)
+char	**ft_export(char **str, char **env)
 {
-	char	**temp;
+	int	i;
 
-}
-
-char	**ft_export(char *str, char **env)
-{
-	if (ft_check_str(str) == 0)
-		return (0);
-	ft_check_env(str, env);
-	return (ft_dup(str, env));
+	i = 0;
+	if (str == 0)
+	{
+		while (env[i] != 0)
+			i++;
+		ft_export_print(env, i);
+		return (env);
+	}
+	while (str[i] != 0)
+	{
+		if (ft_check_str(str[i]) == 0)
+			return (0);
+		ft_check_env(str[i], env);
+		env = ft_dup(str[i], env);
+		i++;
+	}
+	return (env);
 }
