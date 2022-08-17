@@ -2,7 +2,7 @@
 # define BUILTIN_H
 # include "../minishell.h"
 
-char	*ft_cd(char *str);
+int	ft_cd(char *str, t_info *info);
 void	ft_echo(char *str, int offset);
 int	ft_env(char **env);
 int	ft_exit(char **str);

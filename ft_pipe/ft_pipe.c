@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:05:31 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/12 21:08:31 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/17 17:08:05 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_pipe(char *cmd)
 	int		oldfd;
 	
 	if (pipe(fd) < 0)
-		return (0);
+		return (1);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -38,7 +38,7 @@ int	ft_pipe(char *cmd)
 	close(fd[1]);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
-	return (fd[0]);
+	return (0);
 }
 
 int	main(void)

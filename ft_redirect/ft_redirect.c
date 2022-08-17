@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:43:34 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 17:36:25 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:45:17 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_dlt(char *end)
 		return (0);
 	while (1)
 	{
-		str = readline("heredoc>");
+		str = readline(">");
 		if (!ft_strncmp(str, end, ft_strlen(str) + 1))
 			break ;
 		write(fd, str, ft_strlen(str));
