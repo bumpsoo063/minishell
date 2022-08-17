@@ -4,7 +4,7 @@
 // strings
 # define PARSE_ERROR "parse error\n"
 # define PROM "minishell $ "
-# define HEREDOC "/tmp/minishell.heredoc"
+# define HEREDOC "/tmp/.minishell_heredoc"
 
 // redirections
 # define INPUT "<"

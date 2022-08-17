@@ -1,31 +1,20 @@
 #include "ft_sig.h"
 
-void	ft_save_init(struct termios *org_term)
+void	ft_save_init(t_term *org_term)
 {
 	tcgetattr(STDIN_FILENO, org_term);
 }
 
-void	ft_set_term(struct termios *new_term)
+void	ft_set_term(t_term *new_term)
 {
 	tcgetattr(STDIN_FILENO, new_term);
 	new_term->c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, new_term);
 }
 
-void	ft_reset_term(struct termios *org_term)
+void	ft_reset_term(t_term *org_term)
 {
 	tcsetattr(STDIN_FILENO, TCSANOW, org_term);
-}
-
-int	is_whitespace(char *line)
-{
-	while (*line)
-	{
-		if (*line != 32 && !(*line >= 0 & *line <= 13))
-			return(0);
-		line++;
-	}
-	return (1);
 }
 
 void	ft_sigint(int signal)
@@ -46,8 +35,8 @@ void	ft_set_signal()
 int	main(void)
 {
 	char		*line;
-	struct termios	org_term;
-	struct termios	new_term;
+	t_term	org_term;
+	t_term	new_term;
 
 	ft_save_init(&org_term);
 	ft_set_term(&new_term);
