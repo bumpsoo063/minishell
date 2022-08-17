@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:07:29 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/16 15:20:25 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 16:48:49 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,21 @@
 #include <errno.h>
 #include <string.h>
 
-char	*ft_cd(char *str)
+int	ft_cd(char *str, t_info *info)
 {
-	int	ret;
+	char	**buf;
+	char	*tmp;
 
-	ret = 0;
+	buf = ft_calloc(sizeof(char *), 2);
+	if (!buf)
+		return (-1);
+	buf[0] = ft_calloc(sizeof(char), 1025);
 	if (chdir(str))
-		ret = -1;
-	return (ret);
+		return (-1);
+	getcwd(buf[0], 1024);
+	tmp = buf[0];
+	buf[0] = ft_strjoin("OLDPWD=", buf[0]);
+	free(tmp);
+	info->env = ft_export(buf, info->env);	
+	return (0);
 }
