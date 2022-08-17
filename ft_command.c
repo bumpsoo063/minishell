@@ -2,6 +2,7 @@
 #include "builtin/builtin.h"
 #include "const.h"
 #include "minishell.h"
+#include "ft_execve/ft_execve.h"
 
 static void	ft_shift(char **parse, int p)
 {
@@ -20,32 +21,32 @@ static void	ft_shift(char **parse, int p)
 	parse[i + 1] = 0;
 }
 
-static int	ft_command2(char **parse)
+int	ft_exec(char **cmd, t_info *info)
 {
-	if (ft_strncmp(*parse, ECHO, ft_strlen(ECHO) + 1) == 0)
+	if (ft_strncmp(*cmd, ECHO, ft_strlen(ECHO) + 1) == 0)
 	{
-		if (*parse != 0 && ft_strncmp(*parse, "-n", 3) == 0)
-			return ft_echo();
+		if (*cmd != 0 && ft_strncmp(*(cmd + 1), "-n", 3) == 0)
+			return ft_echo(&cmd[2], 0);
 		else
-			return ft_echo();
+			return ft_echo(&cmd[1], 1);
 	}
-	else if (ft_strncmp(*parse, CD, ft_strlen(CD) + 1) == 0)
-		return ft_cd();
-	else if (ft_strncmp(*parse, PWD, ft_strlen(PWD) + 1) == 0)
+	else if (ft_strncmp(*cmd, CD, ft_strlen(CD) + 1) == 0)
+		return ft_cd(cmd[1], info);
+	else if (ft_strncmp(*cmd, PWD, ft_strlen(PWD) + 1) == 0)
 		return (ft_pwd());
-	else if (ft_strncmp(*parse, EXPORT, ft_strlen(EXPORT) + 1) == 0)
-		return (ft_export());
-	else if (ft_strncmp(*parse, UNSET, ft_strlen(UNSET) + 1) == 0)
-		return (ft_unset());
-	else if (ft_strncmp(*parse, ENV, ft_strlen(ENV) + 1) == 0)
-		return (ft_env());
-	else if (ft_strncmp(*parse, EXIT, ft_strlen(EXIT) + 1) == 0)
-		return (ft_exit());
+	else if (ft_strncmp(*cmd, EXPORT, ft_strlen(EXPORT) + 1) == 0)
+		return (ft_export(&cmd[1], info));
+	else if (ft_strncmp(*cmd, UNSET, ft_strlen(UNSET) + 1) == 0)
+		return (ft_unset(&cmd[1], info->env));
+	else if (ft_strncmp(*cmd, ENV, ft_strlen(ENV) + 1) == 0)
+		return (ft_env(info->env));
+	else if (ft_strncmp(*cmd, EXIT, ft_strlen(EXIT) + 1) == 0)
+		return (ft_exit(&cmd[1]));
 	else
-		return (ft_execve());
+		return (ft_execve(cmd, info->env, info));
 }
 
-int	ft_command(char **parse)
+int	ft_command(char **parse, t_info *info)
 {
 	int	i;
 	int	ii;
@@ -66,6 +67,9 @@ int	ft_command(char **parse)
 	while (i-- >= 0)
 		ft_shift(parse, 0);
 	if (parse[i] != 0)
-		ft_pipe(cmd);
-	return ft_command2(cmd);
+		ii = ft_pipe(cmd);
+	else
+		ii = ft_command2(cmd, info);
+	free(cmd);
+	return (ii);
 }

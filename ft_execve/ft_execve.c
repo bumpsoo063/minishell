@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 17:32:58 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:57:50 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_process(char	**path, char **str, char **env)
 	return (ret);
 }
 
-static int	ft_free(char **str, char **path)
+static int	ft_free(char **path)
 {
 	int	i;
 
@@ -51,14 +51,6 @@ static int	ft_free(char **str, char **path)
 		while (path[i])
 			free(path[i++]);
 		free(path);
-	}
-	if (str)
-	{
-		i = 0;
-
-		while (str[i])
-			free(str[i++]);
-		free(str);
 	}
 	return (0);
 }
@@ -77,7 +69,7 @@ int	ft_execve(char **cmd, char **env, t_info *info)
 		return (0);
 	ret = ft_process(path, cmd, info->env);
 	// cmd free 여부 상의
-	ft_free(cmd, path);
+	ft_free(path);
 	return (ret);
 }
 

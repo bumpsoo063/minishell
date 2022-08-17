@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:18:04 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/17 17:06:30 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:54:07 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 #include "../minishell.h"
 #include "../const.h"
 
-int	ft_unset(char *str, char **env)
+int	ft_unset_help(char *str, char **env)
 {
 	const size_t	len = ft_strlen(str);
 	char			**ep;
 	char			**temp;
 
-	if (str == 0)
-		return (1);
 	ep = env;
 	while (*ep != 0)
 	{
@@ -38,6 +36,21 @@ int	ft_unset(char *str, char **env)
 		}
 		else
 			ep++;
+	}
+	return (0);
+}
+
+int	ft_unset(char **str, char **env)
+{
+	int	i;
+
+	i = 0;
+	if (str == 0)
+		return (1);
+	while (str[i] != 0)
+	{
+		ft_unset_help(str[i], env);
+		i++;
 	}
 	return (0);
 }

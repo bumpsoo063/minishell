@@ -20,14 +20,11 @@ static int	ft_process(t_info *info)
 		{
 			return (write(2, strerror(errno), ft_strlen(strerror(errno))));
 		}
-		if (ft_command(parse))
+		if (ft_command(parse, info))
 		{
-
-			// ㅇㅔ러 출력
-			// ft_clean_info
-			return (1);
+			return (write(2, strerror(errno), ft_strlen(strerror(errno))));
 		}
-		// unlink heredoc
+		ft_rm_heredoc();
 	}
 	return (0);
 }
