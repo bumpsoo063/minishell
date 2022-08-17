@@ -4,28 +4,29 @@
 #include "minishell.h"
 
 
-static int	ft_command2(char **parse, int i)
+static int	ft_command2(char **parse)
 {
-	if (ft_strncmp(parse[i], ECHO, ft_strlen(ECHO) + 1) == 0)
+	if (ft_strncmp(*parse, ECHO, ft_strlen(ECHO) + 1) == 0)
 	{
-		if (parse[i + 1] != 0 && ft_strncmp(parse[i + 1], "-n", 3) == 0)
+		if (*parse != 0 && ft_strncmp(*parse, "-n", 3) == 0)
 			return ft_echo();
 		else
 			return ft_echo();
 	}
-	else if (ft_strncmp(parse[i], CD, ft_strlen(CD) + 1) == 0)
+	else if (ft_strncmp(*parse, CD, ft_strlen(CD) + 1) == 0)
 		return ft_cd();
-	else if (ft_strncmp(parse[i], PWD, ft_strlen(PWD) + 1) == 0)
-		return (1);
-	else if (ft_strncmp(parse[i], EXPORT, ft_strlen(EXPORT) + 1) == 0)
-		return (1);
-	else if (ft_strncmp(parse[i], UNSET, ft_strlen(UNSET) + 1) == 0)
-		return (1);
-	else if (ft_strncmp(parse[i], ENV, ft_strlen(ENV) + 1) == 0)
-		return (1);
-	else if (ft_strncmp(parse[i], EXIT, ft_strlen(EXIT) + 1) == 0)
-		return (1);
-	return (1);
+	else if (ft_strncmp(*parse, PWD, ft_strlen(PWD) + 1) == 0)
+		return (ft_pwd());
+	else if (ft_strncmp(*parse, EXPORT, ft_strlen(EXPORT) + 1) == 0)
+		return (ft_export());
+	else if (ft_strncmp(*parse, UNSET, ft_strlen(UNSET) + 1) == 0)
+		return (ft_unset());
+	else if (ft_strncmp(*parse, ENV, ft_strlen(ENV) + 1) == 0)
+		return (ft_env());
+	else if (ft_strncmp(*parse, EXIT, ft_strlen(EXIT) + 1) == 0)
+		return (ft_exit());
+	else
+		return (ft_execve());
 }
 
 int	ft_command(char **parse)
@@ -34,6 +35,7 @@ int	ft_command(char **parse)
 	int	ii;
 	char	**cmd;
 
+	i = 0;
 	while (parse[i] != 0 && ft_strncmp(parse[i], PIPE, 2) == 0)
 		i++;
 	cmd = malloc(sizeof(char *) * (i + 1));
