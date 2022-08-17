@@ -6,13 +6,12 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:43:34 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 16:30:47 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/17 17:36:25 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_redirect.h"
 
-#define FILE_NAME "/tmp/.minishell_heredoc"
 
 // >, >>
 int	ft_gt(char *path, int offset)

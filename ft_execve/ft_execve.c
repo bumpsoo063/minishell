@@ -6,13 +6,15 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/12 20:48:56 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/17 17:32:58 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_execve.h"
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "../minishell.h"
+#include "../ft_parse/ft_parse.h"
 
 static int	ft_process(char	**path, char **str, char **env)
 {
@@ -31,9 +33,9 @@ static int	ft_process(char	**path, char **str, char **env)
 		while (path[i])
 		{
 			cmd = ft_strjoin(path[i++], str[0]);
-			execve(cmd[0], str, NULL);
+			execve(cmd, str, env);
 		}
-		exit(1);
+		exit(127);
 	}
 	wait(&ret);
 	return (ret);
@@ -61,19 +63,19 @@ static int	ft_free(char **str, char **path)
 	return (0);
 }
 
-int	ft_execve(char **cmd, char **env)
+int	ft_execve(char **cmd, char **env, t_info *info)
 {
 	char	**path;
 	int		ret;
 	char	*tmp;
 
 	
-	tmp = ft_substitute(ft_strdup("$PATH"), env);
+	tmp = ft_substitute(ft_strdup("$PATH"), env, info);
 	path = ft_split(tmp, ':');
 	free(tmp);
 	if (!path)
 		return (0);
-	ret = ft_process(path, cmd);
+	ret = ft_process(path, cmd, info->env);
 	// cmd free 여부 상의
 	ft_free(cmd, path);
 	return (ret);

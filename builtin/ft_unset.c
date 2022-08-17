@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:18:04 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/16 15:23:46 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:06:30 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_unset(char *str, char **env)
 	char			**temp;
 
 	if (str == 0)
-		return (0);
+		return (1);
 	ep = env;
 	while (*ep != 0)
 	{
@@ -39,5 +39,5 @@ int	ft_unset(char *str, char **env)
 		else
 			ep++;
 	}
-	return (1);
+	return (0);
 }

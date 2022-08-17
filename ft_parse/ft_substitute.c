@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/11 14:22:44 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:27:24 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../minishell.h"
 #include <stdbool.h>
 
-static char	*ft_word(char *str, char **key)
+static char	*ft_word(char *str, char **key, t_info *info)
 {
 	char	*head;
 	int	i;
@@ -28,6 +28,8 @@ static char	*ft_word(char *str, char **key)
 		f = true;
 	}
 	head = str;
+	if (*str == '?')
+		return (ft_itoa(info->exit));
 	while (*str != 0 && (ft_isalpha(*str) || *str == '_'))
 	{
 		str++;
@@ -58,7 +60,7 @@ static char	*ft_union(char *left, char *key, char *right, char **env)
 	return (ret);
 }
 
-char	*ft_substitute(char *str, char **env)
+char	*ft_substitute(char *str, char **env, t_info *info)
 {
 	char	*left;
 	char	*key;
@@ -73,7 +75,7 @@ char	*ft_substitute(char *str, char **env)
 		else
 			left = ft_substr(str, 0, temp - str);
 		ft_check_error();
-		temp = ft_word(temp, &key);
+		temp = ft_word(temp, &key, info);
 		if (*temp == 0)
 			right = ft_strdup("");
 		else

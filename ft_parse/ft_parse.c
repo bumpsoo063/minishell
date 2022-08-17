@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:12 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/09 16:45:00 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:29:04 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../libft/libft.h"
 #include "ft_parse.h"
 
-static t_q_str	*ft_q_str_quote(char **str, char ch, char **env)
+static t_q_str	*ft_q_str_quote(char **str, char ch, char **env, t_info *info)
 {
 	int	i;
 	char	*temp;
@@ -33,7 +33,7 @@ static t_q_str	*ft_q_str_quote(char **str, char ch, char **env)
 	temp = ft_substr(temp, 0, i);
 	ft_check_error();
 	if (ch == D_Quote)
-		return (t_q_str_new(ft_substitute(temp, env)));
+		return (t_q_str_new(ft_substitute(temp, env, info)));
 	return (t_q_str_new(temp));
 }
 
@@ -66,7 +66,7 @@ static t_q_str	*ft_q_str_pipe(char **str)
 	return (t_q_str_new(temp));
 }
 
-static t_q_str	*ft_q_str_word(char **str, char **env)
+static t_q_str	*ft_q_str_word(char **str, char **env, t_info *info)
 {
 	int	i;
 	char 	*temp;
@@ -80,10 +80,10 @@ static t_q_str	*ft_q_str_word(char **str, char **env)
 	}
 	temp = ft_substr(temp, 0, i);
 	ft_check_error();
-	return (t_q_str_new(ft_substitute(temp, env)));
+	return (t_q_str_new(ft_substitute(temp, env, info)));
 }
 
-char	**ft_parse(char *str, char **env)
+char	**ft_parse(char *str, char **env, t_info *info)
 {
 	t_q_str	*q;
 
@@ -93,9 +93,9 @@ char	**ft_parse(char *str, char **env)
 		if (*str == Space)
 			str++;
 		else if (*str == D_Quote)
-			t_q_str_push(&q, ft_q_str_quote(&str, D_Quote, env));
+			t_q_str_push(&q, ft_q_str_quote(&str, D_Quote, env, info));
 		else if (*str == Quote)
-			t_q_str_push(&q, ft_q_str_quote(&str, Quote, env));
+			t_q_str_push(&q, ft_q_str_quote(&str, Quote, env, info));
 		else if (*str == Input)
 			t_q_str_push(&q, ft_q_str_put(&str, Input));
 		else if (*str == Output)
@@ -103,7 +103,7 @@ char	**ft_parse(char *str, char **env)
 		else if (*str == Pipe)
 			t_q_str_push(&q, ft_q_str_pipe(&str));
 		else
-			t_q_str_push(&q, ft_q_str_word(&str, env));
+			t_q_str_push(&q, ft_q_str_word(&str, env, info));
 	}
 	return (t_q_str_to_str(q));
 }

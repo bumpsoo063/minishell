@@ -3,6 +3,22 @@
 #include "const.h"
 #include "minishell.h"
 
+static void	ft_shift(char **parse, int p)
+{
+	int	i;
+
+	i = 0;
+	while (parse[i] != 0)
+	{
+		if (i >= p)
+			parse[i] = parse[i + 1];
+		if (parse[i] == 0)
+			break ;
+		++i;
+	}
+	free(parse[i + 1]);
+	parse[i + 1] = 0;
+}
 
 static int	ft_command2(char **parse)
 {
@@ -49,5 +65,7 @@ int	ft_command(char **parse)
 	}
 	while (i-- >= 0)
 		ft_shift(parse, 0);
+	if (parse[i] != 0)
+		ft_pipe(cmd);
 	return ft_command2(cmd);
 }
