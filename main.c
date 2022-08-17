@@ -9,6 +9,23 @@
 
 #include <string.h>
 
+static void	ft_shift(char **parse, int p)
+{
+	int	i;
+
+	i = 0;
+	while (parse[i] != 0)
+	{
+		if (i >= p)
+			parse[i] = parse[i + 1];
+		if (parse[i] == 0)
+			break ;
+		++i;
+	}
+	free(parse[i + 1]);
+	parse[i + 1] = 0;
+}
+
 static int	ft_process(t_info *info)
 {
 	char	**parse;
@@ -18,13 +35,17 @@ static int	ft_process(t_info *info)
 	{
 		if (ft_red(parse))
 		{
-			return (write(2, strerror(errno), ft_strlen(strerror(errno))));
+			return (1);
 		}
-		if (ft_command(parse, info))
+		if (*parse != 0)
 		{
-			return (write(2, strerror(errno), ft_strlen(strerror(errno))));
+			if (ft_strncmp(*parse, PIPE, 2) == 0)
+			{
+				ft_shift(parse, 0);
+			}
+			else if (ft_command(parse, info))
+				return (1);
 		}
-		ft_rm_heredoc();
 	}
 	return (0);
 }
@@ -57,13 +78,16 @@ int	main(int argc, char **argv, char **env)
 		if (!input)
 			break ;
 		if (*input != '\0')
+		{	
 			add_history(input);
-		if (*input != '\0' && !is_whitespace(input))
-		{
-			ft_preprocess(&g_info, input);
+			if (*input != '\0' && !is_whitespace(input))
+			{
+				ft_preprocess(&g_info, input);
+				ft_clean_info(&g_info, input);
+			}
+			else
+				free(input);
 		}
-		ft_clean_info(&g_info, input);
-		free(input);
 	}
 	ft_reset_term(&origin);
 }

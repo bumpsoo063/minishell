@@ -4,7 +4,9 @@
 // strings
 # define PARSE_ERROR "parse error\n"
 # define PROM "minishell $ "
-# define HEREDOC "/tmp/.minishell_heredoc"
+# define HEREDOC "/tmp/.minishell_heredoc_bechoi_kyoon"
+# define NOFILE "No such file or directory"
+# define NOCOMM "command not found"
 
 // redirections
 # define INPUT "<"

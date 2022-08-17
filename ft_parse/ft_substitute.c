@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/17 17:27:24 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 20:25:19 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include "ft_parse.h"
 #include "../minishell.h"
 #include <stdbool.h>
+#include <stdio.h>
 
-static char	*ft_word(char *str, char **key, t_info *info)
+static char	*ft_word(char *str, char **key)
 {
 	char	*head;
 	int	i;
@@ -29,7 +30,11 @@ static char	*ft_word(char *str, char **key, t_info *info)
 	}
 	head = str;
 	if (*str == '?')
-		return (ft_itoa(info->exit));
+	{
+		str++;
+		*key = ft_substr(head, 0, ++i);
+		return (str);
+	}
 	while (*str != 0 && (ft_isalpha(*str) || *str == '_'))
 	{
 		str++;
@@ -42,13 +47,16 @@ static char	*ft_word(char *str, char **key, t_info *info)
 	return (str);
 }
 
-static char	*ft_union(char *left, char *key, char *right, char **env)
+static char	*ft_union(char *left, char *key, char *right, t_info *info)
 {
 	char	*value;
 	char	*ret;
 	char	*temp;
 
-	value = ft_search_env(key, env);
+	if (*key == '?')
+		value = ft_itoa(info->exit);
+	else
+		value = ft_search_env(key, info->env);
 	ret = ft_strjoin(left, value);
 	temp = ret;
 	ret = ft_strjoin(ret, right);
@@ -67,6 +75,7 @@ char	*ft_substitute(char *str, char **env, t_info *info)
 	char	*right;
 	char	*temp;
 
+	env = 0;
 	temp = ft_strchr(str, Dollar);
 	while (temp != 0)
 	{
@@ -75,13 +84,13 @@ char	*ft_substitute(char *str, char **env, t_info *info)
 		else
 			left = ft_substr(str, 0, temp - str);
 		ft_check_error();
-		temp = ft_word(temp, &key, info);
+		temp = ft_word(temp, &key);
 		if (*temp == 0)
 			right = ft_strdup("");
 		else
 			right = ft_strdup(temp);
 		ft_check_error();
-		temp = ft_union(left, key, right, env);
+		temp = ft_union(left, key, right, info);
 		free(str);
 		str = temp;
 		temp = ft_strchr(str, Dollar);

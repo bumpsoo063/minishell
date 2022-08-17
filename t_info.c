@@ -46,17 +46,21 @@ void	ft_clean_fd(t_info *info)
 
 	temp = 0;
 	if (isatty(STDOUT_FILENO) != 1)
+	{
+		close(STDOUT_FILENO);
 		temp = dup2(info->out, STDOUT_FILENO);
-	if (temp < 0)
-		ft_check_error();
+	}
 	if (isatty(STDIN_FILENO) != 1)
+	{
+		close(STDIN_FILENO);
 		temp = dup2(info->in, STDIN_FILENO);
-	if (temp < 0)
-		ft_check_error();
+	}
 }
 
 void	ft_clean_info(t_info *info, char *input)
 {
 	ft_parse_free(info->parse);
-	free(input);
+	ft_clean_fd(info);
+	if (input)
+		free(input);
 }

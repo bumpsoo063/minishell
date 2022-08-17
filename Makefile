@@ -6,7 +6,7 @@
 #    By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/02 19:33:42 by bechoi            #+#    #+#              #
-#    Updated: 2022/08/17 18:05:17 by bechoi           ###   ########.fr        #
+#    Updated: 2022/08/17 18:17:11 by bechoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,12 +40,16 @@ SRC=./main.c \
 
 LIBFT=./libft/libft.a
 
+LDFLAGS=-L/Users/bechoi/.brew/opt/readline/lib
+CPPFLAGS=-I/Users/bechoi/.brew/opt/readline/include
+
+
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline $(LDFLAGS) $(CPPFLAGS) -g3 -fsanitize=address -o $(NAME)
 
 $(LIBFT): 
 	make -C libft

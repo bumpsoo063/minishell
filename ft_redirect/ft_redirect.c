@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:43:34 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 17:45:17 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 18:24:16 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,23 @@ int	ft_gt(char *path, int offset)
 	else
 		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
-		return (0);
+		return (1);
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	return (1);
+	return (0);
 }
 
 int	ft_lt(char *path)
 {
-	char	*ret;
-	char	*tmp;
-	char	buf[1024];
 	int	fd;
-	int	read_size;
 
 	fd = open(path, O_RDONLY);
 
 	if (fd < 0)
-		return (0);
+		return (1);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	return (1);
+	return (0);
 }
 
 static int	ft_dupin(void)
@@ -52,10 +48,10 @@ static int	ft_dupin(void)
 
 	fd = open(FILE_NAME, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		return (1);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	return (1);
+	return (0);
 }
 
 int	ft_dlt(char *end)
@@ -65,7 +61,7 @@ int	ft_dlt(char *end)
 
 	fd = open(FILE_NAME, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd < 0)
-		return (0);
+		return (1);
 	while (1)
 	{
 		str = readline(">");

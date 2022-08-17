@@ -6,26 +6,31 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:05:31 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 18:02:09 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 22:46:30 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipe.h"
 #include "../ft_execve/ft_execve.h"
-
+#include <sys/wait.h>
+#include "../ft_sig/ft_sig.h"
 
 int	ft_pipe(char **cmd, t_info *info)
 {
 	pid_t	pid;
 	int		fd[2];
-	int		oldfd;
 	int		temp;
 	
+	signal(SIGINT, SIG_IGN);
 	if (pipe(fd) < 0)
+	{
+		
 		return (1);
+	}
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		//자식 프로세스(명령어실행)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
@@ -38,7 +43,8 @@ int	ft_pipe(char **cmd, t_info *info)
 	close(fd[1]);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
-	return (temp);
+	signal(SIGINT, ft_sigint);
+	return (WEXITSTATUS(temp));
 }
 /*
 int	main(void)

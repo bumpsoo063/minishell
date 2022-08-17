@@ -3,6 +3,8 @@
 #include "const.h"
 #include "minishell.h"
 #include "ft_execve/ft_execve.h"
+#include "ft_pipe/ft_pipe.h"
+#include <sys/wait.h>
 
 static void	ft_shift(char **parse, int p)
 {
@@ -46,6 +48,24 @@ int	ft_exec(char **cmd, t_info *info)
 		return (ft_execve(cmd, info->env, info));
 }
 
+static int	ft_print(char **cmd, t_info *info, int result)
+{
+	info->exit = result;
+	if (result == 127)
+	{
+		write(2, "minishell: ", 11);
+		write(2, cmd[0], ft_strlen(cmd[0]));
+		write(2, ": ", 2);
+		if (ft_strchr(cmd[0], '/'))
+			write(2, NOFILE, ft_strlen(NOFILE));
+		else
+			write(2, NOCOMM, ft_strlen(NOCOMM));
+		write(2, "\n", 1);
+	}
+	free(cmd);
+	return (info->exit);
+}
+
 int	ft_command(char **parse, t_info *info)
 {
 	int	i;
@@ -53,7 +73,7 @@ int	ft_command(char **parse, t_info *info)
 	char	**cmd;
 
 	i = 0;
-	while (parse[i] != 0 && ft_strncmp(parse[i], PIPE, 2) == 0)
+	while (parse[i] != 0 && ft_strncmp(parse[i], PIPE, 2) != 0)
 		i++;
 	cmd = malloc(sizeof(char *) * (i + 1));
 	ft_check_error();
@@ -64,12 +84,11 @@ int	ft_command(char **parse, t_info *info)
 		cmd[ii] = parse[ii];
 		++ii;
 	}
+	if (parse[i] != 0)
+		ii = ft_pipe(cmd, info);
+	else
+		ii = ft_exec(cmd, info);
 	while (i-- >= 0)
 		ft_shift(parse, 0);
-	if (parse[i] != 0)
-		ii = ft_pipe(cmd);
-	else
-		ii = ft_command2(cmd, info);
-	free(cmd);
-	return (ii);
+	return (ft_print(cmd, info, ii));
 }
