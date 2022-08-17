@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:07:29 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 16:48:49 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/17 17:01:30 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ int	ft_cd(char *str, t_info *info)
 
 	buf = ft_calloc(sizeof(char *), 2);
 	if (!buf)
-		return (-1);
+		return (1);
 	buf[0] = ft_calloc(sizeof(char), 1025);
 	if (chdir(str))
-		return (-1);
+		return (1);
 	getcwd(buf[0], 1024);
 	tmp = buf[0];
 	buf[0] = ft_strjoin("OLDPWD=", buf[0]);
 	free(tmp);
-	info->env = ft_export(buf, info->env);	
-	return (0);
+	return (ft_export(buf, info));
 }

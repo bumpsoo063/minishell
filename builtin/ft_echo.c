@@ -6,13 +6,13 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:10:36 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/16 15:19:00 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:06:59 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-void	ft_echo(char *str, int offset)
+int	ft_echo(char *str, int offset)
 {
 	int	i;
 
@@ -26,4 +26,5 @@ void	ft_echo(char *str, int offset)
 
 	if (offset)
 		printf("\n");
+	return (0);
 }
