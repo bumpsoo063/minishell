@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 19:54:17 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 20:37:29 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@
 #include "../ft_sig/ft_sig.h"
 #include <sys/stat.h>
 #include <errno.h>
-/*
-static int	ft_permisiion(char *str)
-{
-	struct stat	st;
-	int		r;
-
-	r = stat(str, &st);
-}*/
 
 static char	*ft_slash(char *path, char *str)
 {
@@ -64,8 +56,6 @@ static int	ft_process(char	**path, char **str, t_info *info)
 			while (path[i])
 			{
 				cmd = ft_slash(path[i++], str[0]);
-			/*	if (ft_permission(cmd))
-					exit(126);*/
 				execve(cmd, str, info->env);
 			}
 		}
@@ -78,7 +68,7 @@ static int	ft_process(char	**path, char **str, t_info *info)
 	ft_set_term();
 	if (WIFSIGNALED(ret))
 	{
-		write(2, "\n", 1);
+		write(1, "\n", 1);
 		return (128 + WTERMSIG(ret));
 	}
 	return (WEXITSTATUS(ret));
@@ -115,7 +105,6 @@ int	ft_execve(char **cmd, char **env, t_info *info)
 	if (!path)
 		return (1);
 	ret = ft_process(path, cmd, info);
-	// cmd free 여부 상의
 	ft_free(path);
 	return (ret);
 }

@@ -6,11 +6,12 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:43:34 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 18:24:16 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 20:33:48 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_redirect.h"
+#include "../ft_sig/ft_sig.h"
 
 
 // >, >>
@@ -56,6 +57,45 @@ static int	ft_dupin(void)
 
 int	ft_dlt(char *end)
 {
+	pid_t	pid;
+	char	*str;
+	int		fd;
+
+	ft_set_child(0);
+	pid = fork();
+	fd = open(FILE_NAME, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+		return (1);
+	if (pid == 0)
+	{
+		ft_set_child(3);
+		while (1)
+		{
+			str = readline(">");
+			if (!str || !ft_strncmp(str, end, ft_strlen(str) + 1))
+				break ;
+			write(fd, str, ft_strlen(str));
+			write(fd, "\n", 1);
+			free(str);
+		}
+		exit(0);
+	}
+	close(fd);
+	wait(&fd);
+	ft_set_child(2);
+	ft_set_term();
+	if (WIFSIGNALED(fd))
+	{
+		write(1, "\n", 1);
+		ft_dupin();
+		return (128 + WTERMSIG(fd));
+	}
+	return (ft_dupin());
+}
+
+/*
+int	ft_dl(char *end)
+{
 	char	*str;
 	int		fd;
 
@@ -72,8 +112,9 @@ int	ft_dlt(char *end)
 		free(str);
 	}
 	close(fd);
-	return (ft_dupin());
 }
+	return (ft_dupin());
+*/
 
 int	ft_rm_heredoc(void)
 {

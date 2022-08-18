@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include <unistd.h>
 #include <stdlib.h>
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include "ft_parse/ft_parse.h"
 
 static char	**ft_init_env(char **env)
