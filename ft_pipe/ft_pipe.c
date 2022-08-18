@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:05:31 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 21:18:15 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/18 21:33:57 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/wait.h>
 #include "../ft_sig/ft_sig.h"
 
-static int	ft_wait(int *fd)
+static int	ft_wait(int *fd, t_info *info)
 {
 	int	ret;
 
@@ -24,7 +24,7 @@ static int	ft_wait(int *fd)
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
 	ft_set_child(2);
-	ft_set_term();
+	ft_set_term(info);
 	if (WIFSIGNALED(ret))
 	{
 		write(1, "\n", 1);
@@ -52,5 +52,5 @@ int	ft_pipe(char **cmd, t_info *info)
 		temp = ft_exec(cmd, info);
 		exit(temp);
 	}
-	return (ft_wait(fd));
+	return (ft_wait(fd, info));
 }

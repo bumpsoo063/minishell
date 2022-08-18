@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:23:40 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 21:20:51 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/18 21:33:36 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include <sys/signal.h>
 #include <unistd.h>
 
-void	ft_set_term(void)
+void	ft_set_term(t_info *info)
 {
 	t_term	new;
 
-	tcgetattr(STDIN_FILENO, &new);
+	tcgetattr(info->in, &new);
 	new.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, &new);
+	tcsetattr(info->in, TCSANOW, &new);
 }
 
 void	ft_child_term(t_info *info)

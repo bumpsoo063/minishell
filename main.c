@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:05:00 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:06:01 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:36:00 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ft_process(t_info *info)
 	parse = info->parse;
 	while (*parse != 0)
 	{
-		if (ft_red(parse))
+		if (ft_red(parse, info))
 		{
 			return (1);
 		}
@@ -92,9 +92,9 @@ int	main(int argc, char **argv, char **env)
 	char	*input;
 	t_info	info;
 
-	ft_set_term();
-	ft_set_signal();
 	info = ft_init_info(argc, argv, env);
+	ft_set_term(&info);
+	ft_set_signal();
 	while (1)
 	{
 		input = readline(PROM);

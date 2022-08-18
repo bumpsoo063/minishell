@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:21:11 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:23:02 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:35:40 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_rm_heredoc(void)
 	return (unlink(FILE_NAME));
 }
 
-static int	ft_red2(char **parse, int *i)
+static int	ft_red2(char **parse, int *i, t_info *info)
 {
 	if (ft_strncmp(parse[*i], INPUT, 2) == 0)
 	{
@@ -40,13 +40,13 @@ static int	ft_red2(char **parse, int *i)
 	else if (ft_strncmp(parse[*i], D_INPUT, 3) == 0)
 	{
 		ft_rm_heredoc();
-		if (ft_dlt(parse[++(*i)]))
+		if (ft_dlt(parse[++(*i)], info))
 			return (1);
 	}
 	return (0);
 }
 
-int	ft_red(char **parse)
+int	ft_red(char **parse, t_info *info)
 {
 	int	i;
 	int	temp;
@@ -55,7 +55,7 @@ int	ft_red(char **parse)
 	while (parse[i] != 0 && ft_strncmp(parse[i], PIPE, 2) != 0)
 	{
 		temp = i;
-		if (ft_red2(parse, &i))
+		if (ft_red2(parse, &i, info))
 			return (1);
 		if (i != temp)
 		{

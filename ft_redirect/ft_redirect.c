@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:43:34 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 21:25:20 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:35:04 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ft_child(char *end, int fd)
 	exit(0);
 }
 
-int	ft_dlt(char *end)
+int	ft_dlt(char *end, t_info *info)
 {
 	pid_t	pid;
 	int		fd;
@@ -84,7 +84,7 @@ int	ft_dlt(char *end)
 	close(fd);
 	wait(&fd);
 	ft_set_child(2);
-	ft_set_term();
+	ft_set_term(info);
 	if (WIFSIGNALED(fd))
 	{
 		write(1, "\n", 1);

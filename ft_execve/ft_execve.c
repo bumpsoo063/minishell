@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 21:13:53 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/18 21:34:42 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	ft_process(char	**path, char **str, t_info *info)
 	}
 	wait(&ret);
 	ft_set_child(2);
-	ft_set_term();
+	ft_set_term(info);
 	if (WIFSIGNALED(ret))
 	{
 		write(1, "\n", 1);
