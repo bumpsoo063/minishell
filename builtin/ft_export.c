@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:05:45 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/17 17:01:12 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:12:02 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static char	**ft_dup(char *str, char **env)
 
 int	ft_export(char **str, t_info *info)
 {
-	int	i;
+	int		i;
 	char	**env;
 
 	i = 0;

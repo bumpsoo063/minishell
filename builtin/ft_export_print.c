@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export_print.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/18 21:12:06 by bechoi            #+#    #+#             */
+/*   Updated: 2022/08/18 21:12:11 by bechoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "../minishell.h"
 #include "../libft/libft.h"
@@ -31,7 +43,7 @@ static char	**ft_order(char **temp)
 void	ft_export_print(char **env, int size)
 {
 	char	**temp;
-	int	i;
+	int		i;
 
 	temp = malloc(sizeof(char *) * (size + 1));
 	ft_check_error();

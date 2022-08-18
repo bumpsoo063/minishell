@@ -1,5 +1,16 @@
-#include "../const.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_syntax.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/18 21:14:07 by bechoi            #+#    #+#             */
+/*   Updated: 2022/08/18 21:14:19 by bechoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../const.h"
 #include "../libft/libft.h"
 
 static int	ft_is_pipe(const char *str)
@@ -54,7 +65,7 @@ static int	ft_check_red(char **parse)
 		if (ft_is_red(parse[i]) == 0)
 		{
 			if (parse[i + 1] == 0)
-				return (1) ;
+				return (1);
 			else if (ft_is_red(parse[i + 1]) == 0)
 				return (1);
 			else if (ft_is_pipe(parse[i + 1]) == 0)

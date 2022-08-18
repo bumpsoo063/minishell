@@ -1,6 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_red.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/18 21:21:11 by bechoi            #+#    #+#             */
+/*   Updated: 2022/08/18 21:23:02 by bechoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/libft.h"
 #include "../const.h"
 #include "ft_redirect.h"
+
+int	ft_rm_heredoc(void)
+{
+	return (unlink(FILE_NAME));
+}
 
 static int	ft_red2(char **parse, int *i)
 {
@@ -51,4 +68,3 @@ int	ft_red(char **parse)
 	}
 	return (0);
 }
-

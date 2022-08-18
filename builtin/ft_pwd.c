@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:09:15 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 16:54:59 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/18 21:12:23 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	ft_pwd(void)
 {
 	char	*buf;
-	
+
 	buf = ft_calloc(sizeof(char), 1024);
 	if (!buf)
 		return (1);
