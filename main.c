@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **env)
 		input = readline(PROM);
 		errno = 0;
 		if (!input)
-			break ;
+			continue ;
 		if (*input != '\0')
 		{	
 			add_history(input);

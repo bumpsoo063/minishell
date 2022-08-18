@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:23:40 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 16:58:13 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 20:22:54 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_reset_term(t_term *org_term)
 void	ft_sigint(int signal)
 {
 	signal = 0;
-	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 1);
 	rl_redisplay();

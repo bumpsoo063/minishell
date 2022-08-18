@@ -6,26 +6,29 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 18:15:11 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 19:54:17 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_execve.h"
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "../minishell.h"
 #include "../ft_parse/ft_parse.h"
 #include "../ft_sig/ft_sig.h"
+#include <sys/stat.h>
+#include <errno.h>
 /*
-static void	ft_sig(int a)
+static int	ft_permisiion(char *str)
 {
-	int	b;
+	struct stat	st;
+	int		r;
 
-	b = a;
-	exit(0);
-}
-*/
+	r = stat(str, &st);
+}*/
+
 static char	*ft_slash(char *path, char *str)
 {
 	char	*ret;
@@ -61,9 +64,13 @@ static int	ft_process(char	**path, char **str, t_info *info)
 			while (path[i])
 			{
 				cmd = ft_slash(path[i++], str[0]);
+			/*	if (ft_permission(cmd))
+					exit(126);*/
 				execve(cmd, str, info->env);
 			}
 		}
+		if (errno == 13)
+			exit(126);
 		exit(127);
 	}
 	wait(&ret);
@@ -112,11 +119,3 @@ int	ft_execve(char **cmd, char **env, t_info *info)
 	ft_free(path);
 	return (ret);
 }
-
-/*
-int	main(int ac, char **av, char **env)
-{
-	ft_execve("cat", env);
-}
-*/
-
