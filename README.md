@@ -45,3 +45,13 @@ _____
 
 - exit 반환값 고민
 - heredoc 임시파일 , 임시파일명 고정 가능?
+
+-----
+### 회의 날짜 : 8월 17일
+
+- heredoc 시그널 처리
+- ctrl \ 처리
+- permission denied
+- exit 큰 수
+- exit 88 | echo $?
+- 없는 환경변수 공백으로 잘 처리
