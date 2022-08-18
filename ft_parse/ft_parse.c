@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:12 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/17 17:29:04 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:13:43 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static t_q_str	*ft_q_str_quote(char **str, char ch, char **env, t_info *info)
 {
-	int	i;
+	int		i;
 	char	*temp;
 
 	temp = ++(*str);
@@ -39,7 +39,7 @@ static t_q_str	*ft_q_str_quote(char **str, char ch, char **env, t_info *info)
 
 static t_q_str	*ft_q_str_put(char **str, char ch)
 {
-	int	i;
+	int		i;
 	char	*temp;
 
 	temp = *str;
@@ -56,7 +56,7 @@ static t_q_str	*ft_q_str_put(char **str, char ch)
 
 static t_q_str	*ft_q_str_pipe(char **str)
 {
-	int	i;
+	int		i;
 	char	*temp;
 
 	i = 0;
@@ -68,12 +68,13 @@ static t_q_str	*ft_q_str_pipe(char **str)
 
 static t_q_str	*ft_q_str_word(char **str, char **env, t_info *info)
 {
-	int	i;
-	char 	*temp;
-	
+	int		i;
+	char	*temp;
+
 	temp = *str;
 	i = 0;
-	while (**str != 0 && **str != Space && **str != Input && **str != Output && **str != Pipe)
+	while (**str != 0 && **str != Space && \
+			**str != Input && **str != Output && **str != Pipe)
 	{
 		(*str)++;
 		i++;

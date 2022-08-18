@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:19 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/09 15:56:16 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:14:33 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static char	*ft_value(char *key, char *env)
 {
 	char	*ret;
-	int	len;
+	int		len;
 
 	ret = 0;
 	len = ft_strlen(key);
@@ -35,7 +35,7 @@ static char	*ft_value(char *key, char *env)
 char	*ft_search_env(char *key, char **env)
 {
 	char	*value;
-	int	i;
+	int		i;
 
 	i = 0;
 	value = 0;
