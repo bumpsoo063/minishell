@@ -5,8 +5,26 @@
 #include "ft_sig/ft_sig.h"
 #include <errno.h>
 #include <readline/readline.h>
+#include "ft_redirect/ft_redirect.h"
 
 #include <string.h>
+
+static void	ft_shift(char **parse, int p)
+{
+	int	i;
+
+	i = 0;
+	while (parse[i] != 0)
+	{
+		if (i >= p)
+			parse[i] = parse[i + 1];
+		if (parse[i] == 0)
+			break ;
+		++i;
+	}
+	free(parse[i + 1]);
+	parse[i + 1] = 0;
+}
 
 static int	ft_process(t_info *info)
 {
@@ -15,32 +33,30 @@ static int	ft_process(t_info *info)
 	parse = info->parse;
 	while (*parse != 0)
 	{
-		if (ft_red(parse) == 0)
+		if (ft_red(parse))
 		{
-			// ㅇㅔ러 출력
-			// ft_clean_info
-			return (0);
+			return (1);
 		}
-		if (ft_command(parse) == 0)
+		if (*parse != 0)
 		{
-
-			// ㅇㅔ러 출력
-			// ft_clean_info
-			return (0);
+			if (ft_strncmp(*parse, PIPE, 2) == 0)
+			{
+				ft_shift(parse, 0);
+			}
+			else if (ft_command(parse, info))
+				return (1);
 		}
-		// unlink heredoc
 	}
-	return (1);
+	return (0);
 }
 
 static int	ft_preprocess(t_info *info,char *input)
 {
-	info->parse = ft_parse(input, info->env);
-	if (ft_parse_syntax(info->parse) == 0)
+	info->parse = ft_parse(input, info->env, info);
+	if (ft_parse_syntax(info->parse))
 	{
 		write(2, PARSE_ERROR, ft_strlen(PARSE_ERROR));
-		ft_clean_info(&g_info, input);
-		return (0);
+		return (1);
 	}
 	return (ft_process(info));
 }
@@ -62,14 +78,16 @@ int	main(int argc, char **argv, char **env)
 		if (!input)
 			break ;
 		if (*input != '\0')
+		{	
 			add_history(input);
-		if (*input != '\0' && !is_whitespace(input))
-		{
-			if (ft_preprocess(&g_info, input) == 0)
-				continue ;
+			if (*input != '\0' && !is_whitespace(input))
+			{
+				ft_preprocess(&g_info, input);
+				ft_clean_info(&g_info, input);
+			}
+			else
+				free(input);
 		}
-		ft_clean_info(&g_info, input);
-		free(input);
 	}
 	ft_reset_term(&origin);
 }

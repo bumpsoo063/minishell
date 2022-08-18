@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:23:40 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 15:23:41 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/17 22:43:20 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	ft_reset_term(t_term *org_term)
 
 void	ft_sigint(int signal)
 {
-	printf("\n");
-	if (rl_on_new_line() == -1)
-		exit(1);
+	signal = 0;
+	write(1, "\n", 1);
+	rl_on_new_line();
 	rl_replace_line("", 1);
 	rl_redisplay();
 }
@@ -43,7 +43,7 @@ void	ft_set_signal()
 	signal(SIGINT, ft_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }
-
+/*
 int	main(void)
 {
 	char		*line;
@@ -68,4 +68,4 @@ int	main(void)
 	}
 	ft_reset_term(&org_term);
 	return (0);
-}
+}*/

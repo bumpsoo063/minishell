@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:17:29 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/16 17:46:14 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 20:08:41 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // strlen -> ft_strlen
 void	ft_check_error(void)
 {
-	if (errno > 0)
+	if (errno == 28)
 	{
 		write(2, strerror(errno), strlen(strerror(errno)));
 		exit(EXIT_FAILURE);

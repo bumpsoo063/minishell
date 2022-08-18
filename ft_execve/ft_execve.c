@@ -6,13 +6,37 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/12 20:48:56 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/17 23:33:17 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_execve.h"
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "../minishell.h"
+#include "../ft_parse/ft_parse.h"
+#include "../ft_sig/ft_sig.h"
+/*
+static void	ft_sig(int a)
+{
+	int	b;
+
+	b = a;
+	exit(0);
+}
+*/
+static char	*ft_slash(char *path, char *str)
+{
+	char	*ret;
+	char	*tmp;
+
+	ret = ft_strjoin(path, "/");
+	tmp = ret;
+	ret = ft_strjoin(ret, str);
+	free(tmp);
+	return (ret);
+}
 
 static int	ft_process(char	**path, char **str, char **env)
 {
@@ -21,25 +45,34 @@ static int	ft_process(char	**path, char **str, char **env)
 	char	*cmd;
 	int		ret;
 
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid < 0)
-		// return 값 고민
 		return (1);
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		i = 0;
-		while (path[i])
+		//signal(SIGINT, ft_sig);
+		if (path == 0)
+			execve(str[0], str, env);
+		else
 		{
-			cmd = ft_strjoin(path[i++], str[0]);
-			execve(cmd[0], str, NULL);
+			while (path[i])
+			{
+				cmd = ft_slash(path[i++], str[0]);
+				execve(cmd, str, env);
+			}
 		}
-		exit(1);
+		printf("test!!!\n");
+		exit(127);
 	}
 	wait(&ret);
-	return (ret);
+	signal(SIGINT, ft_sigint);
+	return (WEXITSTATUS(ret));
 }
 
-static int	ft_free(char **str, char **path)
+static int	ft_free(char **path)
 {
 	int	i;
 
@@ -50,32 +83,28 @@ static int	ft_free(char **str, char **path)
 			free(path[i++]);
 		free(path);
 	}
-	if (str)
-	{
-		i = 0;
-
-		while (str[i])
-			free(str[i++]);
-		free(str);
-	}
 	return (0);
 }
 
-int	ft_execve(char **cmd, char **env)
+int	ft_execve(char **cmd, char **env, t_info *info)
 {
 	char	**path;
 	int		ret;
 	char	*tmp;
 
-	
-	tmp = ft_substitute(ft_strdup("$PATH"), env);
+	if (ft_strchr(cmd[0], '/'))
+	{
+		ret = ft_process(0, cmd, info->env);
+		return (ret);
+	}
+	tmp = ft_substitute(ft_strdup("$PATH"), env, info);
 	path = ft_split(tmp, ':');
 	free(tmp);
 	if (!path)
-		return (0);
-	ret = ft_process(path, cmd);
+		return (1);
+	ret = ft_process(path, cmd, info->env);
 	// cmd free 여부 상의
-	ft_free(cmd, path);
+	ft_free(path);
 	return (ret);
 }
 

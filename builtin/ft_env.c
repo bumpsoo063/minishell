@@ -6,14 +6,14 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:16:00 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/04 14:01:09 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/17 17:05:26 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-void	ft_env(char **env)
+int	ft_env(char **env)
 {
 	int		i;
 
@@ -23,4 +23,5 @@ void	ft_env(char **env)
 		printf("%s\n", env[i]);
 		++i;
 	}
+	return (0);
 }
