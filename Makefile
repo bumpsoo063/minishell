@@ -6,7 +6,7 @@
 #    By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/02 19:33:42 by bechoi            #+#    #+#              #
-#    Updated: 2022/08/18 20:00:13 by kyoon            ###   ########.fr        #
+#    Updated: 2022/08/18 20:41:22 by bechoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline $(LDFLAGS) $(CPPFLAGS) -g3 -fsanitize=address -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline $(LDFLAGS) $(CPPFLAGS) -o $(NAME)
 
 $(LIBFT): 
 	make -C libft

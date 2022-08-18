@@ -2,23 +2,6 @@
 #include "../const.h"
 #include "ft_redirect.h"
 
-static void	ft_shift(char **parse, int p)
-{
-	int	i;
-
-	i = 0;
-	while (parse[i] != 0)
-	{
-		if (i >= p)
-			parse[i] = parse[i + 1];
-		if (parse[i] == 0)
-			break ;
-		++i;
-	}
-	free(parse[i + 1]);
-	parse[i + 1] = 0;
-}
-
 static int	ft_red2(char **parse, int *i)
 {
 	if (ft_strncmp(parse[*i], INPUT, 2) == 0)

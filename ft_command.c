@@ -6,23 +6,6 @@
 #include "ft_pipe/ft_pipe.h"
 #include <sys/wait.h>
 
-static void	ft_shift(char **parse, int p)
-{
-	int	i;
-
-	i = 0;
-	while (parse[i] != 0)
-	{
-		if (i >= p)
-			parse[i] = parse[i + 1];
-		if (parse[i] == 0)
-			break ;
-		++i;
-	}
-	free(parse[i + 1]);
-	parse[i + 1] = 0;
-}
-
 int	ft_exec(char **cmd, t_info *info)
 {
 	if (ft_strncmp(*cmd, M_ECHO, ft_strlen(M_ECHO) + 1) == 0)

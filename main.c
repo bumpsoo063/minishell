@@ -9,15 +9,20 @@
 
 #include <string.h>
 
-static void	ft_shift(char **parse, int p)
+void	ft_shift(char **parse, int p)
 {
 	int	i;
+	char	*tmp;
 
 	i = 0;
 	while (parse[i] != 0)
 	{
 		if (i >= p)
-			parse[i] = parse[i + 1];
+		{
+			tmp = parse[i + 1];
+			parse[i + 1] = parse[i];
+			parse[i] = tmp;
+		}
 		if (parse[i] == 0)
 			break ;
 		++i;
@@ -85,7 +90,7 @@ int	main(int argc, char **argv, char **env)
 		input = readline(PROM);
 		errno = 0;
 		if (!input)
-			continue ;
+			break ;
 		if (*input != '\0')
 		{	
 			add_history(input);
