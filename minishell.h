@@ -21,5 +21,6 @@ void	ft_clean_fd(t_info *info);
 void	ft_clean_info(t_info *info, char *input);
 int	ft_exec(char **cmd ,t_info *info);
 int	ft_command(char **parse, t_info *info);
+void	ft_shift(char **parse, int p);
 
 #endif
