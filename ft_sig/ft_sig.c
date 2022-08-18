@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:23:40 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 16:58:13 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 20:32:22 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,13 @@ void	ft_set_child(int offset)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 	}
-	else
+	else if (offset == 2)
 		ft_set_signal();
+	else
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);
+	}
 }
 
 void	ft_set_signal()

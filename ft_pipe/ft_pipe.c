@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:05:31 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 18:14:59 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 20:17:03 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_pipe(char **cmd, t_info *info)
 	ft_set_term();
 	if (WIFSIGNALED(temp))
 	{
-		write(2, "\n", 1);
+		write(1, "\n", 1);
 		return (128 + WTERMSIG(temp));
 	}
 	return (WEXITSTATUS(temp));

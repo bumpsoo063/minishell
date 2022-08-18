@@ -6,7 +6,7 @@
 #    By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/02 19:33:42 by bechoi            #+#    #+#              #
-#    Updated: 2022/08/18 17:32:16 by bechoi           ###   ########.fr        #
+#    Updated: 2022/08/18 20:00:13 by kyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,8 @@ SRC=./main.c \
 
 LIBFT=./libft/libft.a
 
-LDFLAGS=-L/Users/bechoi/.brew/opt/readline/lib
-CPPFLAGS=-I/Users/bechoi/.brew/opt/readline/include
+LDFLAGS=-L${HOME}/.brew/opt/readline/lib
+CPPFLAGS=-I${HOME}/.brew/opt/readline/include
 
 
 OBJ = $(SRC:.c=.o)

@@ -98,5 +98,5 @@ int	main(int argc, char **argv, char **env)
 				free(input);
 		}
 	}
-	ft_reset_term(&(info.org));
+	ft_child_term(&info);
 }
