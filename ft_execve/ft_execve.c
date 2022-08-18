@@ -6,26 +6,21 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 20:09:45 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/18 20:37:29 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_execve.h"
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "../minishell.h"
 #include "../ft_parse/ft_parse.h"
 #include "../ft_sig/ft_sig.h"
-/*
-static void	ft_sig(int a)
-{
-	int	b;
+#include <sys/stat.h>
+#include <errno.h>
 
-	b = a;
-	exit(0);
-}
-*/
 static char	*ft_slash(char *path, char *str)
 {
 	char	*ret;
@@ -64,6 +59,8 @@ static int	ft_process(char	**path, char **str, t_info *info)
 				execve(cmd, str, info->env);
 			}
 		}
+		if (errno == 13)
+			exit(126);
 		exit(127);
 	}
 	wait(&ret);
@@ -71,7 +68,7 @@ static int	ft_process(char	**path, char **str, t_info *info)
 	ft_set_term();
 	if (WIFSIGNALED(ret))
 	{
-		write(2, "\n", 1);
+		write(1, "\n", 1);
 		return (128 + WTERMSIG(ret));
 	}
 	return (WEXITSTATUS(ret));
@@ -108,15 +105,6 @@ int	ft_execve(char **cmd, char **env, t_info *info)
 	if (!path)
 		return (1);
 	ret = ft_process(path, cmd, info);
-	// cmd free 여부 상의
 	ft_free(path);
 	return (ret);
 }
-
-/*
-int	main(int ac, char **av, char **env)
-{
-	ft_execve("cat", env);
-}
-*/
-

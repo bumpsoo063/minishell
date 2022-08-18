@@ -59,7 +59,13 @@ static int	ft_print(char **cmd, int result)
 			write(2, NOFILE, ft_strlen(NOFILE));
 		else
 			write(2, NOCOMM, ft_strlen(NOCOMM));
-		write(2, "\n", 1);
+	}
+	else if (result == 126)
+	{
+		write(2, "minishell: ", 11);
+		write(2, cmd[0], ft_strlen(cmd[0]));
+		write(2, ": ", 2);
+		write(2, NOPERM, ft_strlen(NOPERM));
 	}
 	free(cmd);
 	return (result);

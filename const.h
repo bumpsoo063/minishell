@@ -5,8 +5,9 @@
 # define PARSE_ERROR "parse error\n"
 # define PROM "minishell $ "
 # define HEREDOC "/tmp/.minishell_heredoc_bechoi_kyoon"
-# define NOFILE "No such file or directory"
-# define NOCOMM "command not found"
+# define NOFILE "No such file or directory\n"
+# define NOCOMM "command not found\n"
+# define NOPERM "Permission denied\n"
 
 // redirections
 # define INPUT "<"
