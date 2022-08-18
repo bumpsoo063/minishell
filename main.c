@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/18 21:05:00 by bechoi            #+#    #+#             */
+/*   Updated: 2022/08/18 21:06:01 by bechoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "libft/libft.h"
 #include "ft_parse/ft_parse.h"
@@ -6,12 +18,11 @@
 #include <errno.h>
 #include <readline/readline.h>
 #include "ft_redirect/ft_redirect.h"
-
 #include <string.h>
 
 void	ft_shift(char **parse, int p)
 {
-	int	i;
+	int		i;
 	char	*tmp;
 
 	i = 0;
@@ -55,11 +66,11 @@ static int	ft_process(t_info *info)
 	return (0);
 }
 
-static int	ft_preprocess(t_info *info,char *input)
+static int	ft_preprocess(t_info *info, char *input)
 {
 	int	i;
 
-	i =0;
+	i = 0;
 	info->parse = ft_parse(input, info->env, info);
 	while (info->parse[i] != 0)
 	{
@@ -81,7 +92,6 @@ int	main(int argc, char **argv, char **env)
 	char	*input;
 	t_info	info;
 
-	ft_save_init(&(info.org));
 	ft_set_term();
 	ft_set_signal();
 	info = ft_init_info(argc, argv, env);

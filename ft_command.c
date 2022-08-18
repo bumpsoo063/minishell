@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_command.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/18 21:03:09 by bechoi            #+#    #+#             */
+/*   Updated: 2022/08/18 21:04:44 by bechoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft/libft.h"
 #include "builtin/builtin.h"
 #include "const.h"
@@ -11,12 +23,12 @@ int	ft_exec(char **cmd, t_info *info)
 	if (ft_strncmp(*cmd, M_ECHO, ft_strlen(M_ECHO) + 1) == 0)
 	{
 		if (*(cmd + 1) != 0 && ft_strncmp(*(cmd + 1), "-n", 3) == 0)
-			return ft_echo(&cmd[2], 0);
+			return (ft_echo(&cmd[2], 0));
 		else
-			return ft_echo(&cmd[1], 1);
+			return (ft_echo(&cmd[1], 1));
 	}
 	else if (ft_strncmp(*cmd, CD, ft_strlen(CD) + 1) == 0)
-		return ft_cd(cmd[1], info);
+		return (ft_cd(cmd[1], info));
 	else if (ft_strncmp(*cmd, PWD, ft_strlen(PWD) + 1) == 0)
 		return (ft_pwd());
 	else if (ft_strncmp(*cmd, EXPORT, ft_strlen(EXPORT) + 1) == 0)
@@ -73,8 +85,8 @@ static int	ft_com(char **cmd, t_info *info, int i, char **parse)
 
 int	ft_command(char **parse, t_info *info)
 {
-	int	i;
-	int	ii;
+	int		i;
+	int		ii;
 	char	**cmd;
 
 	i = 0;
