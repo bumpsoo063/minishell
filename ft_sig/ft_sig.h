@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sig.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/18 21:19:09 by kyoon             #+#    #+#             */
+/*   Updated: 2022/08/18 21:20:31 by kyoon            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_SIG_H
-#define FT_SIG_H
+# define FT_SIG_H
+
 # include <signal.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -9,12 +22,10 @@
 # include <stdlib.h>
 # include "../minishell.h"
 
-void	ft_save_init(t_term *org_term);
-void	ft_set_term();
-void	ft_reset_term(t_term *org_term);
-int	is_whitespace(char *line);
+void	ft_set_term(void);
+int		is_whitespace(char *line);
 void	ft_sigint(int signal);
-void	ft_set_signal();
+void	ft_set_signal(void);
 void	ft_set_child(int offset);
 void	ft_child_term(t_info *info);
 

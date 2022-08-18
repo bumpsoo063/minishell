@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 20:37:29 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:13:53 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,27 @@ static char	*ft_slash(char *path, char *str)
 	return (ret);
 }
 
+static void	ft_child_process(char **path, char **str, t_info *info)
+{
+	int		i;
+	char	*cmd;
+
+	i = 0;
+	if (path == 0)
+		execve(str[0], str, info->env);
+	else
+	{
+		while (path[i])
+		{
+			cmd = ft_slash(path[i++], str[0]);
+			execve(cmd, str, info->env);
+		}
+	}
+}
+
 static int	ft_process(char	**path, char **str, t_info *info)
 {
 	pid_t	pid;
-	int		i;
-	char	*cmd;
 	int		ret;
 
 	ft_set_child(0);
@@ -48,17 +64,7 @@ static int	ft_process(char	**path, char **str, t_info *info)
 	{
 		ft_child_term(info);
 		ft_set_child(1);
-		i = 0;
-		if (path == 0)
-			execve(str[0], str, info->env);
-		else
-		{
-			while (path[i])
-			{
-				cmd = ft_slash(path[i++], str[0]);
-				execve(cmd, str, info->env);
-			}
-		}
+		ft_child_process(path, str, info);
 		if (errno == 13)
 			exit(126);
 		exit(127);
