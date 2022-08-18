@@ -6,22 +6,35 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:23:40 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 22:43:20 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 16:58:13 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_sig.h"
+#include <sys/signal.h>
+#include <unistd.h>
 
 void	ft_save_init(t_term *org_term)
 {
 	tcgetattr(STDIN_FILENO, org_term);
 }
 
-void	ft_set_term(t_term *new_term)
+void	ft_set_term()
 {
-	tcgetattr(STDIN_FILENO, new_term);
-	new_term->c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, new_term);
+	t_term	new;
+
+	tcgetattr(STDIN_FILENO, &new);
+	new.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, &new);
+}
+
+void	ft_child_term(t_info *info)
+{
+	t_term	new;
+
+	tcgetattr(info->in, &new);
+	new.c_lflag |= (ECHOCTL);
+	tcsetattr(info->in, TCSANOW, &new);
 }
 
 void	ft_reset_term(t_term *org_term)
@@ -36,6 +49,22 @@ void	ft_sigint(int signal)
 	rl_on_new_line();
 	rl_replace_line("", 1);
 	rl_redisplay();
+}
+
+void	ft_set_child(int offset)
+{
+	if (offset == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (offset == 1)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+	else
+		ft_set_signal();
 }
 
 void	ft_set_signal()

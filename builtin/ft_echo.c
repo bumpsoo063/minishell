@@ -6,25 +6,26 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:10:36 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 17:48:32 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:20:03 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
+#include "../libft/libft.h"
 
 int	ft_echo(char **str, int offset)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
-		printf("%s", str[i]);
+		write(1, str[i], ft_strlen(str[i]));
 		if (str[i + 1])
-			printf(" ");
+			write(1, " ", 1);
 		i++;
 	}
 	if (offset)
-		printf("\n");
+		write(1, "\n", 1);
 	return (0);
 }

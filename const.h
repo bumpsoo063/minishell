@@ -18,7 +18,7 @@
 # define PIPE "|"
 
 // builtin
-# define ECHO "echo"
+# define M_ECHO "echo"
 # define CD "cd"
 # define PWD "pwd"
 # define EXPORT "export"

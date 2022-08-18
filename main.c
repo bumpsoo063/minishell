@@ -52,7 +52,17 @@ static int	ft_process(t_info *info)
 
 static int	ft_preprocess(t_info *info,char *input)
 {
+	int	i;
+
+	i =0;
 	info->parse = ft_parse(input, info->env, info);
+	while (info->parse[i] != 0)
+	{
+		if (info->parse[i][0] == 0)
+			ft_shift(info->parse, i);
+		else
+			i++;
+	}
 	if (ft_parse_syntax(info->parse))
 	{
 		write(2, PARSE_ERROR, ft_strlen(PARSE_ERROR));
@@ -64,13 +74,12 @@ static int	ft_preprocess(t_info *info,char *input)
 int	main(int argc, char **argv, char **env)
 {
 	char	*input;
-	t_term	origin;
-	t_term	new;
+	t_info	info;
 
-	ft_save_init(&origin);
-	ft_set_term(&new);
+	ft_save_init(&(info.org));
+	ft_set_term();
 	ft_set_signal();
-	g_info = ft_init_info(argc, argv, env);
+	info = ft_init_info(argc, argv, env);
 	while (1)
 	{
 		input = readline(PROM);
@@ -82,12 +91,12 @@ int	main(int argc, char **argv, char **env)
 			add_history(input);
 			if (*input != '\0' && !is_whitespace(input))
 			{
-				ft_preprocess(&g_info, input);
-				ft_clean_info(&g_info, input);
+				ft_preprocess(&info, input);
+				ft_clean_info(&info, input);
 			}
 			else
 				free(input);
 		}
 	}
-	ft_reset_term(&origin);
+	ft_reset_term(&(info.org));
 }
