@@ -25,9 +25,9 @@ static void	ft_shift(char **parse, int p)
 
 int	ft_exec(char **cmd, t_info *info)
 {
-	if (ft_strncmp(*cmd, ECHO, ft_strlen(ECHO) + 1) == 0)
+	if (ft_strncmp(*cmd, M_ECHO, ft_strlen(M_ECHO) + 1) == 0)
 	{
-		if (*cmd != 0 && ft_strncmp(*(cmd + 1), "-n", 3) == 0)
+		if (*(cmd + 1) != 0 && ft_strncmp(*(cmd + 1), "-n", 3) == 0)
 			return ft_echo(&cmd[2], 0);
 		else
 			return ft_echo(&cmd[1], 1);
@@ -48,9 +48,8 @@ int	ft_exec(char **cmd, t_info *info)
 		return (ft_execve(cmd, info->env, info));
 }
 
-static int	ft_print(char **cmd, t_info *info, int result)
+static int	ft_print(char **cmd, int result)
 {
-	info->exit = result;
 	if (result == 127)
 	{
 		write(2, "minishell: ", 11);
@@ -63,7 +62,24 @@ static int	ft_print(char **cmd, t_info *info, int result)
 		write(2, "\n", 1);
 	}
 	free(cmd);
-	return (info->exit);
+	return (result);
+}
+
+static int	ft_com(char **cmd, t_info *info, int i, char **parse)
+{
+	int	ii;
+
+	if (parse[i] != 0)
+	{
+		ft_print(cmd, ft_pipe(cmd, info));
+		return (0);
+	}
+	else
+	{
+		ii = ft_exec(cmd, info);
+		info->exit = ii;
+		return (ft_print(cmd, ii));
+	}
 }
 
 int	ft_command(char **parse, t_info *info)
@@ -74,21 +90,17 @@ int	ft_command(char **parse, t_info *info)
 
 	i = 0;
 	while (parse[i] != 0 && ft_strncmp(parse[i], PIPE, 2) != 0)
-		i++;
-	cmd = malloc(sizeof(char *) * (i + 1));
+		++i;
+	cmd = ft_calloc(sizeof(char *), (i + 1));
 	ft_check_error();
-	cmd[i] = 0;
 	ii = 0;
 	while (ii < i)
 	{
 		cmd[ii] = parse[ii];
 		++ii;
 	}
-	if (parse[i] != 0)
-		ii = ft_pipe(cmd, info);
-	else
-		ii = ft_exec(cmd, info);
+	ii = ft_com(cmd, info, i, parse);
 	while (i-- >= 0)
 		ft_shift(parse, 0);
-	return (ft_print(cmd, info, ii));
+	return (ii);
 }

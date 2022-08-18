@@ -1,6 +1,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "const.h"
+# include <termios.h>
+
+typedef struct termios t_term;
 
 typedef struct s_info
 {
@@ -9,6 +12,7 @@ typedef struct s_info
 	int	in;
 	int	out;
 	int	exit;
+	t_term	org;
 }	t_info;
 
 void	ft_check_error(void);
@@ -17,7 +21,5 @@ void	ft_clean_fd(t_info *info);
 void	ft_clean_info(t_info *info, char *input);
 int	ft_exec(char **cmd ,t_info *info);
 int	ft_command(char **parse, t_info *info);
-
-t_info	g_info;
 
 #endif

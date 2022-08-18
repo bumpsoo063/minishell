@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 23:33:17 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:15:11 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,42 @@ static char	*ft_slash(char *path, char *str)
 	return (ret);
 }
 
-static int	ft_process(char	**path, char **str, char **env)
+static int	ft_process(char	**path, char **str, t_info *info)
 {
 	pid_t	pid;
 	int		i;
 	char	*cmd;
 	int		ret;
 
-	signal(SIGINT, SIG_IGN);
+	ft_set_child(0);
 	pid = fork();
 	if (pid < 0)
 		return (1);
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
+		ft_child_term(info);
+		ft_set_child(1);
 		i = 0;
-		//signal(SIGINT, ft_sig);
 		if (path == 0)
-			execve(str[0], str, env);
+			execve(str[0], str, info->env);
 		else
 		{
 			while (path[i])
 			{
 				cmd = ft_slash(path[i++], str[0]);
-				execve(cmd, str, env);
+				execve(cmd, str, info->env);
 			}
 		}
-		printf("test!!!\n");
 		exit(127);
 	}
 	wait(&ret);
-	signal(SIGINT, ft_sigint);
+	ft_set_child(2);
+	ft_set_term();
+	if (WIFSIGNALED(ret))
+	{
+		write(2, "\n", 1);
+		return (128 + WTERMSIG(ret));
+	}
 	return (WEXITSTATUS(ret));
 }
 
@@ -94,7 +99,7 @@ int	ft_execve(char **cmd, char **env, t_info *info)
 
 	if (ft_strchr(cmd[0], '/'))
 	{
-		ret = ft_process(0, cmd, info->env);
+		ret = ft_process(0, cmd, info);
 		return (ret);
 	}
 	tmp = ft_substitute(ft_strdup("$PATH"), env, info);
@@ -102,7 +107,7 @@ int	ft_execve(char **cmd, char **env, t_info *info)
 	free(tmp);
 	if (!path)
 		return (1);
-	ret = ft_process(path, cmd, info->env);
+	ret = ft_process(path, cmd, info);
 	// cmd free 여부 상의
 	ft_free(path);
 	return (ret);

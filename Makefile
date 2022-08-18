@@ -6,11 +6,11 @@
 #    By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/02 19:33:42 by bechoi            #+#    #+#              #
-#    Updated: 2022/08/17 18:17:11 by bechoi           ###   ########.fr        #
+#    Updated: 2022/08/18 17:32:16 by bechoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC=gcc
+CC=cc
 CFLAGS=-Wall -Wextra -Werror
 NAME=minishell
 SRC=./main.c \
