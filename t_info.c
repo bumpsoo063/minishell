@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:06:15 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/19 14:53:51 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 15:12:40 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ t_info	ft_init_info(int argc, char **argv, char **env)
 {
 	t_info	ret;
 
-	argc = 0;
+	if (argc != 1)
+	{
+		write(2, "minishell: argument error\n", 27);
+		exit(1);
+	}
 	argv = 0;
 	ret.env = ft_init_env(env);
 	ret.in = dup(STDIN_FILENO);
