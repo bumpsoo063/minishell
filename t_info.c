@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:06:15 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:06:15 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 15:12:40 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 #include "ft_parse/ft_parse.h"
+#include "builtin/builtin.h"
 
 static char	**ft_init_env(char **env)
 {
@@ -37,11 +38,35 @@ static char	**ft_init_env(char **env)
 	return (ret);
 }
 
+static void	ft_shlvl(t_info *info)
+{
+	char	**tmp;
+	int		i;
+	char	*toa;
+
+	tmp = ft_calloc(sizeof(char *), 2);
+	toa = ft_strdup("SHLVL");
+	tmp[0] = ft_search_env(toa, info->env);
+	free(toa);
+	i = ft_atoi(tmp[0]) + 1;
+	free(tmp[0]);
+	toa = ft_itoa(i);
+	tmp[0] = ft_strjoin("SHLVL=", toa);
+	free(toa);
+	ft_export(tmp, info);
+	free(tmp[0]);
+	free(tmp);
+}
+
 t_info	ft_init_info(int argc, char **argv, char **env)
 {
 	t_info	ret;
 
-	argc = 0;
+	if (argc != 1)
+	{
+		write(2, "minishell: argument error\n", 27);
+		exit(1);
+	}
 	argv = 0;
 	ret.env = ft_init_env(env);
 	ret.in = dup(STDIN_FILENO);
@@ -49,6 +74,7 @@ t_info	ft_init_info(int argc, char **argv, char **env)
 	ret.exit = 0;
 	if (ret.in < 0 || ret.out < 0)
 		ft_check_error();
+	ft_shlvl(&ret);
 	return (ret);
 }
 

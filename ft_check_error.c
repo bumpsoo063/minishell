@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:17:29 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/17 20:08:41 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:56:16 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <unistd.h>
 #include <string.h>
 
-// strlen -> ft_strlen
 void	ft_check_error(void)
 {
 	if (errno == 28)
