@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:08:40 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/19 14:20:52 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/19 14:35:42 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_echo(char **str, int offset);
 int		ft_env(char **env);
 int		ft_exit(char **str);
 int		ft_export(char **str, t_info *info);
-void	ft_export_print(char **env, int size);
+void	ft_export_print(char **env);
 int		ft_pwd(void);
 int		ft_unset(char **str, char **env);
 

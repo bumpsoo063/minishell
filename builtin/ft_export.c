@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:05:45 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/19 14:20:53 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/19 14:36:17 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,43 @@ static void	ft_check_env(char *str, char **env)
 	}
 }
 
+static int	ft_export_err(char *str, int i)
+{
+	if (i)
+	{
+		write(2, "minishell: ", 11);
+		write(2, "export: ", 8);
+		write(2, str, ft_strlen(str));
+		write(2, ": not a valid identifier\n", 26);
+		return (1);
+	}
+	return (0);
+}
+
 static int	ft_check_str(char *str)
 {
-	char	*temp;
+	int		ret;
 
-	if (str == 0 || *str == 0 || *str == Equal)
-		return (1);
-	temp = ft_strchr(str, Equal);
-	if (temp != 0)
-		if (*(temp - 1) != 0 && *(temp + 1) != 0)
-			return (0);
-	return (1);
+	ret = 0;
+	while (*str)
+	{
+		if ((ft_isalpha(*str) || *str == '_'))
+		{
+			if (*(str + 1) == Equal)
+			{
+				break ;
+			}
+		}
+		else
+		{
+			ret = 1;
+			break ;
+		}
+		str++;
+	}
+	if (*str == 0)
+		ret = 1;
+	return (ft_export_err(str, ret));
 }
 
 static char	**ft_dup(char *str, char **env)
@@ -80,25 +106,25 @@ int	ft_export(char **str, t_info *info)
 {
 	int		i;
 	char	**env;
+	int		ret;
 
 	i = 0;
+	ret = 0;
 	env = info->env;
-	if (str == 0)
+	if (str == 0 || str[i] == 0)
+		ft_export_print(env);
+	while (str && str[i] != 0)
 	{
-		while (env[i] != 0)
+		if (ft_check_str(str[i]) == 1)
+		{
+			ret = 1;
 			i++;
-		ft_export_print(env, i);
-		info->env = env;
-		return (0);
-	}
-	while (str[i] != 0)
-	{
-		if (ft_check_str(str[i]))
-			return (1);
+			continue ;
+		}
 		ft_check_env(str[i], env);
 		env = ft_dup(str[i], env);
 		i++;
 	}
 	info->env = env;
-	return (0);
+	return (ret);
 }
