@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:43:34 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 21:35:04 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:04:25 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_dupin(void)
 {
 	int	fd;
 
-	fd = open(FILE_NAME, O_RDONLY);
+	fd = open(HEREDOC, O_RDONLY);
 	if (fd < 0)
 		return (1);
 	dup2(fd, STDIN_FILENO);
@@ -76,7 +76,7 @@ int	ft_dlt(char *end, t_info *info)
 
 	ft_set_child(0);
 	pid = fork();
-	fd = open(FILE_NAME, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open(HEREDOC, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 		return (1);
 	if (pid == 0)

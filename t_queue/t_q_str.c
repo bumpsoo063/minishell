@@ -6,13 +6,11 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:29:35 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/09 15:41:15 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:16:56 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "t_queue.h"
-#include "../minishell.h"
 
 t_q_str	*t_q_str_new(char *str)
 {

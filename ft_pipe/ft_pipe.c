@@ -6,14 +6,11 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:05:31 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 21:33:57 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:08:48 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipe.h"
-#include "../ft_execve/ft_execve.h"
-#include <sys/wait.h>
-#include "../ft_sig/ft_sig.h"
 
 static int	ft_wait(int *fd, t_info *info)
 {

@@ -6,13 +6,11 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:23:40 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 21:33:36 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:15:41 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_sig.h"
-#include <sys/signal.h>
-#include <unistd.h>
 
 void	ft_set_term(t_info *info)
 {

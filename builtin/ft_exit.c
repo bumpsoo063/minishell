@@ -6,13 +6,11 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:16:13 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:11:45 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:19:35 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include "../libft/libft.h"
+#include "builtin.h"
 
 static	int	is_space(char str)
 {

@@ -6,11 +6,11 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:14:01 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:14:02 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:13:47 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ft_parse.h"
 
 void	ft_parse_free(char **parse)
 {

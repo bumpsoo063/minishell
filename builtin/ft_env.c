@@ -6,12 +6,11 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:16:00 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/17 17:05:26 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:20:23 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "builtin.h"
 
 int	ft_env(char **env)
 {

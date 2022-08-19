@@ -6,13 +6,11 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:19 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:14:33 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:13:56 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parse.h"
-#include "../libft/libft.h"
-#include "../minishell.h"
 
 static char	*ft_value(char *key, char *env)
 {

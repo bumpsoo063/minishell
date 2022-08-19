@@ -6,12 +6,11 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:14:07 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:14:19 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:14:44 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../const.h"
-#include "../libft/libft.h"
+#include "ft_parse.h"
 
 static int	ft_is_pipe(const char *str)
 {

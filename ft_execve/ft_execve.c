@@ -6,20 +6,11 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 13:09:02 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 21:34:42 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:11:27 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_execve.h"
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include "../minishell.h"
-#include "../ft_parse/ft_parse.h"
-#include "../ft_sig/ft_sig.h"
-#include <sys/stat.h>
-#include <errno.h>
 
 static char	*ft_slash(char *path, char *str)
 {

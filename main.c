@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:05:00 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:36:00 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:21:55 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include <errno.h>
 #include <readline/readline.h>
 #include "ft_redirect/ft_redirect.h"
-#include <string.h>
 
 void	ft_shift(char **parse, int p)
 {

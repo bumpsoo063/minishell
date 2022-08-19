@@ -6,14 +6,10 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:12 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:13:43 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:13:16 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-#include "ft_parse.h"
-#include "../t_queue/t_queue.h"
-#include "../libft/libft.h"
 #include "ft_parse.h"
 
 static t_q_str	*ft_q_str_quote(char **str, char ch, char **env, t_info *info)

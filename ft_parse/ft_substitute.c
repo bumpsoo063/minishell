@@ -6,15 +6,11 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:25:24 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:20:32 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:14:25 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "ft_parse.h"
-#include "../minishell.h"
-#include <stdbool.h>
-#include <stdio.h>
 
 static char	*ft_exit_status(char **str, char **key, char *head, int *i)
 {

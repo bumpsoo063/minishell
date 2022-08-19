@@ -6,12 +6,11 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:10:36 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 18:20:03 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:19:11 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "../libft/libft.h"
+#include "builtin.h"
 
 int	ft_echo(char **str, int offset)
 {

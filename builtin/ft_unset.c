@@ -6,14 +6,11 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:18:04 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/17 17:54:07 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:20:07 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include <stdlib.h>
-#include "../minishell.h"
-#include "../const.h"
+#include "builtin.h"
 
 int	ft_unset_help(char *str, char **env)
 {

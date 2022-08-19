@@ -6,14 +6,10 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:05:45 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:12:02 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:20:53 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdbool.h>
-#include "../minishell.h"
-#include "../libft/libft.h"
 #include "builtin.h"
 
 static void	ft_check_env(char *str, char **env)

@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:21:11 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:35:40 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:04:41 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	ft_rm_heredoc(void)
 {
-	return (unlink(FILE_NAME));
+	return (unlink(HEREDOC));
 }
 
 static int	ft_red2(char **parse, int *i, t_info *info)

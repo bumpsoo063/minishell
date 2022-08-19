@@ -6,14 +6,10 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:07:29 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/17 21:46:35 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:18:51 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include <errno.h>
-#include <string.h>
-#include "../minishell.h"
 #include "builtin.h"
 
 int	ft_cd(char *str, t_info *info)

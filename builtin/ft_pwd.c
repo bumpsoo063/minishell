@@ -6,12 +6,11 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:09:15 by kyoon             #+#    #+#             */
-/*   Updated: 2022/08/18 21:12:23 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:21:06 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include <stdio.h>
+#include "builtin.h"
 
 int	ft_pwd(void)
 {

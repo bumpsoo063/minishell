@@ -6,13 +6,16 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:29:33 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:22:17 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:16:51 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef T_QUEUE_H
 # define T_QUEUE_H
 # include "../const.h"
+# include "../minishell.h"
+# include <stdlib.h>
+# include "../minishell.h"
 
 typedef struct s_q_str
 {
