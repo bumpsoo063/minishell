@@ -6,14 +6,13 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:26:58 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/18 21:26:59 by bechoi           ###   ########.fr       */
+/*   Updated: 2022/08/19 14:56:26 by bechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONST_H
 # define CONST_H
 
-// strings
 # define PARSE_ERROR "parse error\n"
 # define PROM "minishell $ "
 # define HEREDOC "/tmp/.minishell_heredoc_bechoi_kyoon"
@@ -21,16 +20,13 @@
 # define NOCOMM "command not found\n"
 # define NOPERM "Permission denied\n"
 
-// redirections
 # define INPUT "<"
 # define D_INPUT "<<"
 # define OUTPUT ">"
 # define D_OUTPUT ">>"
 
-// pipe
 # define PIPE "|"
 
-// builtin
 # define M_ECHO "echo"
 # define CD "cd"
 # define PWD "pwd"
@@ -39,7 +35,6 @@
 # define ENV "env"
 # define EXIT "exit"
 
-// characters
 enum	e_chars {
 	Quote = 39,
 	D_Quote = 34,
