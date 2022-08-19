@@ -6,7 +6,7 @@
 /*   By: bechoi <bechoi@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 21:12:06 by bechoi            #+#    #+#             */
-/*   Updated: 2022/08/19 14:36:04 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/08/19 14:37:08 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	ft_order(char **temp)
 {
-	int	i;
-	int	j;
-	int	small;
+	int		i;
+	int		j;
+	int		small;
 	char	*tmp;
 
 	i = 0;
